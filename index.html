@@ -3,12 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Vraj Panchal - Matrimonial Profile</title>
+    <title>Vraj Panchal - The Profile</title>
     
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-    <!-- Using ultra-premium luxury fonts (Bodoni Moda & Jost) -->
-    <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,500;0,6..96,600;1,6..96,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <!-- Ultra-luxury fonts: Cormorant Upright for elegance, Manrope for stark modern clarity -->
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Upright:wght@300;400;500;600;700&family=Manrope:wght@200;300;400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <script>
@@ -16,15 +16,16 @@
             theme: {
                 extend: {
                     fontFamily: {
-                        sans: ['Jost', 'sans-serif'],
-                        serif: ['Bodoni Moda', 'serif'],
+                        sans: ['Manrope', 'sans-serif'],
+                        serif: ['Cormorant Upright', 'serif'],
                     },
                     colors: {
-                        brand: {
-                            wine: '#581c22',     /* Royal Burgundy/Wine */
-                            cream: '#fdfbf7',    /* Warm Ivory Paper */
-                            sand: '#d4a373',     /* Soft Gold/Sand */
-                            charcoal: '#222222', /* Soft Black for text */
+                        lux: {
+                            base: '#070a10',     /* Midnight Sapphire / Deepest Navy */
+                            surface: '#0f141e',  /* Slightly lighter navy for depth */
+                            gold: '#d4af37',     /* Brushed Champagne Gold */
+                            pearl: '#f3ece3',    /* Pearl White for readable text */
+                            muted: '#8a94a6',    /* Muted blue-grey */
                         }
                     }
                 }
@@ -32,145 +33,149 @@
         }
     </script>
     <style>
-        /* Mobile scroll lock */
-        html, body { overflow-x: hidden !important; width: 100%; position: relative; background-color: #fdfbf7; color: #222222; }
-        
-        /* The Fixed Parallax Background (Image 1) */
-        .parallax-bg {
-            position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: -2;
-        }
-        .parallax-bg img { width: 100%; height: 100%; object-fit: cover; }
-        .bg-overlay { position: fixed; inset: 0; background: rgba(34, 34, 34, 0.4); z-index: -1; }
-
-        /* Premium Paper Card Effect */
-        .paper-card {
-            background-color: #fdfbf7;
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.15);
+        html, body { 
+            background-color: #070a10; 
+            color: #f3ece3; 
+            overflow-x: hidden !important; 
+            width: 100%;
+            position: relative;
         }
 
-        /* Scrolling Marquee Animation */
-        .marquee-container { overflow: hidden; white-space: nowrap; width: 100%; }
-        .marquee-content { display: inline-block; animation: marquee 20s linear infinite; }
-        @keyframes marquee { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+        /* CUSTOM CINEMATIC FILM GRAIN */
+        .film-grain {
+            position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+            pointer-events: none; z-index: 50; opacity: 0.04;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+        }
 
-        /* Animated Slideshow (Images 3,4,5) */
+        /* Massive Background Watermark Numbers */
+        .watermark {
+            position: absolute;
+            font-size: 20rem;
+            line-height: 1;
+            font-family: 'Cormorant Upright', serif;
+            color: rgba(212, 175, 55, 0.03); /* Faint gold */
+            z-index: 0;
+            pointer-events: none;
+            user-select: none;
+        }
+
+        @media (max-width: 768px) {
+            .watermark { font-size: 10rem; }
+        }
+
+        /* Slideshow Fading Setup */
         .slideshow-wrapper { position: relative; width: 100%; height: 100%; }
         .slideshow-wrapper img {
             position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover;
-            opacity: 0; animation: imageFade 12s infinite; 
+            opacity: 0; animation: imageFade 15s infinite; 
         }
         .slideshow-wrapper img:nth-child(1) { animation-delay: 0s; }
-        .slideshow-wrapper img:nth-child(2) { animation-delay: 4s; }
-        .slideshow-wrapper img:nth-child(3) { animation-delay: 8s; }
+        .slideshow-wrapper img:nth-child(2) { animation-delay: 5s; }
+        .slideshow-wrapper img:nth-child(3) { animation-delay: 10s; }
 
         @keyframes imageFade {
-            0% { opacity: 0; transform: scale(1); }
-            10% { opacity: 1; transform: scale(1.03); } 
-            33% { opacity: 1; transform: scale(1.06); } 
-            43% { opacity: 0; transform: scale(1.07); } 
-            100% { opacity: 0; transform: scale(1); }
+            0% { opacity: 0; transform: scale(1.05); }
+            10% { opacity: 1; transform: scale(1.02); } 
+            33% { opacity: 1; transform: scale(1); } 
+            43% { opacity: 0; transform: scale(0.98); } 
+            100% { opacity: 0; transform: scale(1.05); }
         }
+
+        /* Image hover reveal effect */
+        .art-img { transition: filter 0.5s ease, transform 0.8s ease; filter: grayscale(40%); }
+        .group:hover .art-img { filter: grayscale(0%); transform: scale(1.03); }
+        
+        /* Custom delicate borders */
+        .border-delicate { border: 1px solid rgba(212, 175, 55, 0.15); }
     </style>
 </head>
-<body class="antialiased selection:bg-brand-wine selection:text-white">
+<body class="antialiased selection:bg-lux-gold selection:text-lux-base">
 
-<!-- FIXED BACKGROUND LAYER -->
-<div class="parallax-bg">
-    <img src="images/hero-bg.jpg" onerror="this.src='https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?q=80&w=2000&auto=format&fit=crop'" alt="Background">
-</div>
-<div class="bg-overlay"></div>
+<!-- Permanent Film Grain Overlay -->
+<div class="film-grain"></div>
 
-<!-- MAIN SCROLLING CONTENT -->
-<div class="w-full overflow-hidden relative z-10 pt-12 md:pt-24 pb-20">
+<div class="w-full overflow-hidden relative">
 
-    <!-- SLIDE 1: The Magazine Cover Hero -->
-    <section class="relative w-full flex items-center justify-center px-4 md:px-6 mb-24">
+    <!-- SLIDE 1: The Immersive Hero -->
+    <section class="relative w-full h-[100dvh] flex items-end justify-center pb-20 md:pb-32 px-6">
+        <!-- Hero Background Image -->
+        <div class="absolute inset-0 w-full h-full z-0">
+            <img src="images/hero-bg.jpg" onerror="this.src='https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?q=80&w=2000&auto=format&fit=crop'" class="w-full h-full object-cover" alt="Hero">
+            <!-- Vignette gradient for text readability -->
+            <div class="absolute inset-0 bg-gradient-to-t from-lux-base via-lux-base/50 to-transparent"></div>
+            <div class="absolute inset-0 bg-gradient-to-b from-lux-base/50 to-transparent"></div>
+        </div>
         
-        <!-- The Floating White Card -->
-        <div class="paper-card p-8 md:p-14 max-w-xl w-full text-center relative mt-24 rounded-2xl" data-aos="fade-up" data-aos-duration="1500">
+        <div class="relative z-10 w-full max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-end gap-10">
             
-            <!-- Break-out Profile Picture (Image 2) -->
-            <div class="relative w-40 h-40 md:w-52 md:h-52 mx-auto -mt-28 md:-mt-40 mb-6 shadow-2xl rounded-full p-2 bg-brand-cream border border-gray-200">
-                <img src="images/main-profile.jpg" onerror="this.src='https://images.unsplash.com/photo-1534308143481-c55f00be8bd7?q=80&w=1000&auto=format&fit=crop'" class="w-full h-full object-cover rounded-full" alt="Vraj Panchal">
+            <div data-aos="fade-up" data-aos-duration="2000">
+                <p class="text-lux-gold text-[10px] md:text-xs tracking-[0.3em] uppercase mb-4 md:mb-6 font-semibold">
+                    ॥ OM Shree Ganeshay Namah ॥
+                </p>
+                <h1 class="text-6xl md:text-8xl lg:text-[8rem] font-serif leading-none tracking-wide text-lux-pearl drop-shadow-2xl">
+                    VRAJ<br>
+                    <span class="italic text-lux-gold">PANCHAL</span>
+                </h1>
             </div>
 
-            <p class="text-brand-wine font-medium tracking-[0.2em] uppercase text-[10px] md:text-xs mb-4">॥ OM Shree Ganeshay Namah ॥</p>
-            
-            <h1 class="text-5xl md:text-7xl font-serif text-brand-charcoal leading-none mb-4">
-                Vraj <br><span class="italic text-brand-wine">Panchal</span>
-            </h1>
-            
-            <p class="text-sm md:text-base text-gray-500 font-light max-w-sm mx-auto mb-8">
-                A blend of traditional Indian values and modern aspirations.
-            </p>
-            
-            <div class="flex justify-center items-center gap-4 text-xs md:text-sm font-medium text-brand-charcoal tracking-widest uppercase border-t border-gray-200 pt-6">
-                <span>23 Years</span>
-                <span class="w-1.5 h-1.5 rounded-full bg-brand-sand"></span>
-                <span>Hindu Panchal</span>
-                <span class="w-1.5 h-1.5 rounded-full bg-brand-sand"></span>
-                <span>Malta</span>
+            <div data-aos="fade-left" data-aos-duration="2000" data-aos-delay="500" class="max-w-xs text-left md:text-right border-l md:border-l-0 md:border-r border-lux-gold/30 pl-4 md:pl-0 md:pr-4">
+                <p class="text-lux-pearl/80 text-sm md:text-base font-light leading-relaxed mb-4">
+                    A cinematic glimpse into my life, heritage, and ambitions. Based in Malta, rooted in Tarapur.
+                </p>
+                <p class="text-lux-gold text-xs tracking-[0.2em] uppercase">Scroll to Discover</p>
             </div>
+
         </div>
     </section>
 
-    <!-- NEW EYE CATCHER: Animated Marquee Banner -->
-    <div class="bg-brand-wine text-brand-cream py-4 border-y-4 border-brand-sand mb-24 relative shadow-xl">
-        <div class="marquee-container">
-            <div class="marquee-content text-xs md:text-sm tracking-[0.3em] uppercase font-medium flex gap-8 items-center">
-                <span>Family First</span> <i class="fa-solid fa-star text-brand-sand text-[10px]"></i>
-                <span>Strictly Vegetarian</span> <i class="fa-solid fa-star text-brand-sand text-[10px]"></i>
-                <span>Currently in Malta, Europe</span> <i class="fa-solid fa-star text-brand-sand text-[10px]"></i>
-                <span>Modern yet Traditional</span> <i class="fa-solid fa-star text-brand-sand text-[10px]"></i>
-                <!-- Duplicated for infinite loop effect -->
-                <span>Family First</span> <i class="fa-solid fa-star text-brand-sand text-[10px]"></i>
-                <span>Strictly Vegetarian</span> <i class="fa-solid fa-star text-brand-sand text-[10px]"></i>
-                <span>Currently in Malta, Europe</span> <i class="fa-solid fa-star text-brand-sand text-[10px]"></i>
-                <span>Modern yet Traditional</span>
-            </div>
-        </div>
-    </div>
-
-    <!-- SLIDE 2: Personal & Cultural (Editorial Columns) -->
-    <section class="relative w-full px-4 md:px-6 mb-24">
-        <div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12">
+    <!-- SLIDE 2: Chapter 01 - The Persona (NO CARDS) -->
+    <section class="relative w-full py-24 md:py-40 px-6">
+        <div class="watermark top-0 left-0 -translate-x-1/4">01</div>
+        
+        <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12 md:gap-24 relative z-10 items-center">
             
-            <div data-aos="fade-up" class="paper-card p-8 md:p-12 rounded-2xl border-t-8 border-brand-wine">
-                <h2 class="text-3xl font-serif text-brand-wine mb-8 flex items-center justify-between border-b border-gray-200 pb-4">
-                    Personal Info <i class="fa-regular fa-user text-brand-sand text-2xl"></i>
+            <!-- Left Side: Editorial Image -->
+            <div class="lg:col-span-5 relative" data-aos="fade-right">
+                <div class="aspect-[3/4] w-full max-w-md mx-auto lg:mx-0 overflow-hidden rounded-t-full rounded-b-md border-delicate p-2">
+                    <img src="images/main-profile.jpg" onerror="this.src='https://images.unsplash.com/photo-1534308143481-c55f00be8bd7?q=80&w=1000&auto=format&fit=crop'" class="w-full h-full object-cover rounded-t-full rounded-b-sm filter contrast-125" alt="Profile">
+                </div>
+                <!-- Floating Element -->
+                <div class="absolute -right-4 md:-right-10 bottom-20 bg-lux-surface/90 backdrop-blur-md border-delicate px-6 py-4 rounded-xl shadow-2xl">
+                    <p class="text-lux-gold text-[10px] uppercase tracking-widest mb-1">Age & Height</p>
+                    <p class="text-lux-pearl font-serif text-2xl">23 Yr / 5'7"</p>
+                </div>
+            </div>
+
+            <!-- Right Side: Floating Text -->
+            <div class="lg:col-span-7" data-aos="fade-up">
+                <h2 class="text-4xl md:text-6xl font-serif text-lux-pearl mb-10">
+                    The <span class="italic text-lux-gold">Persona</span>
                 </h2>
-                <div class="space-y-6">
-                    <div>
-                        <p class="text-gray-400 text-[10px] md:text-xs uppercase tracking-widest font-bold mb-1">Date & Place of Birth</p>
-                        <p class="text-brand-charcoal text-lg md:text-xl font-serif">07 Dec 2003, Tarapur</p>
+                
+                <div class="grid grid-cols-2 gap-y-12 gap-x-8">
+                    <div class="border-t border-lux-gold/20 pt-4">
+                        <p class="text-lux-muted text-[10px] uppercase tracking-[0.2em] font-bold mb-2">Born</p>
+                        <p class="text-lux-pearl text-xl font-light">07 Dec 2003</p>
+                        <p class="text-lux-gold/70 text-sm mt-1 italic">Tarapur</p>
                     </div>
-                    <div>
-                        <p class="text-gray-400 text-[10px] md:text-xs uppercase tracking-widest font-bold mb-1">Height & Blood Group</p>
-                        <p class="text-brand-charcoal text-lg md:text-xl font-serif">5'7" | B+</p>
+                    
+                    <div class="border-t border-lux-gold/20 pt-4">
+                        <p class="text-lux-muted text-[10px] uppercase tracking-[0.2em] font-bold mb-2">Heritage</p>
+                        <p class="text-lux-pearl text-xl font-light">Hindu Panchal</p>
+                        <p class="text-lux-gold/70 text-sm mt-1 italic">Indian Nationality</p>
                     </div>
-                    <div>
-                        <p class="text-gray-400 text-[10px] md:text-xs uppercase tracking-widest font-bold mb-1">Dietary Preferences</p>
-                        <p class="text-green-700 text-lg md:text-xl font-serif font-semibold italic">Strictly Vegetarian</p>
-                    </div>
-                </div>
-            </div>
 
-            <div data-aos="fade-up" data-aos-delay="200" class="paper-card p-8 md:p-12 rounded-2xl border-t-8 border-brand-sand">
-                <h2 class="text-3xl font-serif text-brand-wine mb-8 flex items-center justify-between border-b border-gray-200 pb-4">
-                    Cultural Roots <i class="fa-solid fa-om text-brand-sand text-2xl"></i>
-                </h2>
-                <div class="space-y-6">
-                    <div>
-                        <p class="text-gray-400 text-[10px] md:text-xs uppercase tracking-widest font-bold mb-1">Religion & Caste</p>
-                        <p class="text-brand-charcoal text-lg md:text-xl font-serif">Hindu - Panchal</p>
+                    <div class="border-t border-lux-gold/20 pt-4">
+                        <p class="text-lux-muted text-[10px] uppercase tracking-[0.2em] font-bold mb-2">Dietary</p>
+                        <p class="text-lux-pearl text-xl font-light">Vegetarian</p>
+                        <p class="text-lux-gold/70 text-sm mt-1 italic">Strictly</p>
                     </div>
-                    <div>
-                        <p class="text-gray-400 text-[10px] md:text-xs uppercase tracking-widest font-bold mb-1">Rashi (Zodiac)</p>
-                        <p class="text-brand-charcoal text-lg md:text-xl font-serif">Vrushabh (Taurus)</p>
-                    </div>
-                    <div>
-                        <p class="text-gray-400 text-[10px] md:text-xs uppercase tracking-widest font-bold mb-1">Nationality</p>
-                        <p class="text-brand-charcoal text-lg md:text-xl font-serif">Indian</p>
+
+                    <div class="border-t border-lux-gold/20 pt-4">
+                        <p class="text-lux-muted text-[10px] uppercase tracking-[0.2em] font-bold mb-2">Astrology</p>
+                        <p class="text-lux-pearl text-xl font-light">Vrushabh</p>
+                        <p class="text-lux-gold/70 text-sm mt-1 italic">Taurus</p>
                     </div>
                 </div>
             </div>
@@ -178,231 +183,224 @@
         </div>
     </section>
 
-    <!-- SLIDE 3: Family Details -->
-    <section class="relative w-full px-4 md:px-6 mb-24">
-        <div class="max-w-5xl mx-auto" data-aos="zoom-in-up">
-            <div class="paper-card p-8 md:p-16 rounded-2xl text-center">
-                
-                <h2 class="text-4xl md:text-5xl font-serif text-brand-wine mb-4">Our Family</h2>
-                <p class="text-gray-500 mb-12 max-w-xl mx-auto font-light">A close-knit family balancing our traditional roots in Tarapur with modern ambitions.</p>
-                
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-10 md:gap-8 text-left border-y border-gray-200 py-10">
-                    <div>
-                        <p class="text-brand-sand text-[10px] md:text-xs font-bold uppercase tracking-widest mb-2">Father</p>
-                        <h3 class="text-xl md:text-2xl font-serif text-brand-charcoal">Naimeshbhai Jagdishbhai Panchal</h3>
-                        <p class="text-gray-500 text-sm mt-2">Welder & Transporter</p>
-                    </div>
-                    <div>
-                        <p class="text-brand-sand text-[10px] md:text-xs font-bold uppercase tracking-widest mb-2">Mother</p>
-                        <h3 class="text-xl md:text-2xl font-serif text-brand-charcoal">Vaishaliben Naimeshbhai Panchal</h3>
-                        <p class="text-gray-500 text-sm mt-2">Tailor</p>
-                    </div>
-                    <div>
-                        <p class="text-brand-sand text-[10px] md:text-xs font-bold uppercase tracking-widest mb-2">Sibling</p>
-                        <h3 class="text-xl md:text-2xl font-serif text-brand-charcoal">Hiral</h3>
-                    </div>
-                </div>
-
-                <div class="mt-10 bg-brand-cream border border-brand-sand/30 p-6 rounded-xl inline-block text-left">
-                    <p class="text-brand-wine text-[10px] md:text-xs font-bold uppercase tracking-widest mb-2"><i class="fa-solid fa-house-chimney mr-2"></i>Native Residence</p>
-                    <p class="text-brand-charcoal text-sm md:text-base">Bhakti nagar society, Vasad Road, Tarapur, Anand, Pincode 388180</p>
-                </div>
+    <!-- SLIDE 3: Chapter 02 - Bloodline (NO CARDS) -->
+    <section class="relative w-full py-24 md:py-40 px-6 bg-lux-surface">
+        <div class="watermark top-10 right-0 translate-x-1/4">02</div>
+        
+        <div class="max-w-6xl mx-auto relative z-10" data-aos="fade-up">
+            <div class="text-center mb-16 md:mb-24">
+                <h2 class="text-4xl md:text-6xl font-serif text-lux-pearl mb-4">Our <span class="italic text-lux-gold">Heritage</span></h2>
+                <div class="w-12 h-[1px] bg-lux-gold mx-auto"></div>
             </div>
-        </div>
-    </section>
-
-    <!-- SLIDE 4: Education & Animated Slideshow Background -->
-    <section class="relative w-full px-4 md:px-6 mb-24">
-        <div class="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-6 md:gap-10">
             
-            <!-- Education Card -->
-            <div data-aos="fade-up" class="lg:col-span-5 paper-card p-8 md:p-12 rounded-2xl h-full flex flex-col justify-center">
-                <h2 class="text-3xl font-serif text-brand-wine mb-8 border-b border-gray-200 pb-4">Education</h2>
+            <!-- Staggered Typography Layout instead of boxes -->
+            <div class="flex flex-col md:flex-row justify-between items-center md:items-start gap-16 md:gap-8">
                 
-                <div class="border-l-2 border-brand-sand pl-5 space-y-10">
-                    <div class="relative">
-                        <div class="absolute -left-[27px] top-1 w-3 h-3 bg-brand-wine rounded-full"></div>
-                        <p class="text-brand-sand text-[10px] md:text-xs font-bold tracking-widest uppercase mb-1">Current Study</p>
-                        <h4 class="text-xl font-serif text-brand-charcoal">Business & Management</h4>
-                        <p class="text-gray-500 mt-2 font-light text-sm">Experiencing international culture in Malta, Europe.</p>
+                <div class="text-center md:text-left flex-1" data-aos="fade-right">
+                    <p class="text-lux-gold text-[10px] uppercase tracking-[0.2em] font-bold mb-2">Father</p>
+                    <h3 class="text-3xl md:text-4xl font-serif text-lux-pearl">Naimeshbhai Jagdishbhai Panchal</h3>
+                    <p class="text-lux-muted mt-2 font-light tracking-wide">Welder & Transporter</p>
+                </div>
+                
+                <div class="hidden md:block w-[1px] h-32 bg-lux-gold/20"></div>
+
+                <div class="text-center md:text-left flex-1" data-aos="fade-left">
+                    <p class="text-lux-gold text-[10px] uppercase tracking-[0.2em] font-bold mb-2">Mother</p>
+                    <h3 class="text-3xl md:text-4xl font-serif text-lux-pearl">Vaishaliben Naimeshbhai Panchal</h3>
+                    <p class="text-lux-muted mt-2 font-light tracking-wide">Tailor</p>
+                </div>
+                
+            </div>
+
+            <div class="mt-20 flex flex-col md:flex-row justify-between items-center border-t border-lux-gold/20 pt-10" data-aos="fade-up">
+                <div class="text-center md:text-left mb-8 md:mb-0">
+                    <p class="text-lux-gold text-[10px] uppercase tracking-[0.2em] font-bold mb-2">Sibling</p>
+                    <h3 class="text-2xl font-serif text-lux-pearl">Hiral</h3>
+                </div>
+                <div class="text-center md:text-right max-w-sm">
+                    <p class="text-lux-gold text-[10px] uppercase tracking-[0.2em] font-bold mb-2">Native Residence</p>
+                    <p class="text-lux-pearl font-light leading-relaxed">Bhakti nagar society, Vasad Road,<br>Tarapur, Anand, Pincode 388180</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SLIDE 4: Chapter 03 - Trajectory (NO CARDS) -->
+    <section class="relative w-full py-24 md:py-40 px-6">
+        <div class="watermark bottom-0 left-0 -translate-x-1/4">03</div>
+
+        <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16 md:gap-24 relative z-10 items-center">
+            
+            <div data-aos="fade-up">
+                <h2 class="text-4xl md:text-6xl font-serif text-lux-pearl mb-12">
+                    The <span class="italic text-lux-gold">Trajectory</span>
+                </h2>
+                
+                <div class="space-y-12">
+                    <div>
+                        <div class="flex items-center gap-4 mb-2">
+                            <div class="w-8 h-[1px] bg-lux-gold"></div>
+                            <p class="text-lux-gold text-[10px] uppercase tracking-[0.2em] font-bold">Present Focus</p>
+                        </div>
+                        <h4 class="text-3xl font-serif text-lux-pearl mb-2">Business & Management</h4>
+                        <p class="text-lux-muted font-light leading-relaxed max-w-md">Broadening global perspectives and acquiring higher education independently in Malta, Europe.</p>
                     </div>
-                    <div class="relative">
-                        <div class="absolute -left-[27px] top-1 w-3 h-3 bg-gray-300 rounded-full"></div>
-                        <p class="text-gray-500 text-[10px] md:text-xs font-bold tracking-widest uppercase mb-1">Previous (2022)</p>
-                        <h4 class="text-xl font-serif text-brand-charcoal">Diploma in Computer Engineering</h4>
-                        <p class="text-gray-500 mt-1 font-light text-sm">Gujarat Technological University</p>
+                    
+                    <div>
+                        <div class="flex items-center gap-4 mb-2">
+                            <div class="w-8 h-[1px] bg-lux-muted/40"></div>
+                            <p class="text-lux-muted text-[10px] uppercase tracking-[0.2em] font-bold">Foundation (2022)</p>
+                        </div>
+                        <h4 class="text-2xl font-serif text-lux-pearl/80 mb-2">Diploma in Computer Engineering</h4>
+                        <p class="text-lux-muted/80 font-light leading-relaxed max-w-md">Gujarat Technological University</p>
                     </div>
+                </div>
+
+                <div class="mt-16 pt-10 border-t border-lux-gold/10">
+                    <p class="text-lux-gold text-[10px] uppercase tracking-[0.2em] font-bold mb-6">Passions & Interests</p>
+                    <p class="text-lux-pearl font-serif text-2xl md:text-3xl italic leading-relaxed">
+                        "Finding balance through <span class="text-lux-gold">Traveling</span>, capturing moments in <span class="text-lux-gold">Photography</span>, and exploring logic via <span class="text-lux-gold">Coding</span> & <span class="text-lux-gold">Trading</span>."
+                    </p>
                 </div>
             </div>
 
-            <!-- Lifestyle Slideshow (Images 3,4,5) -->
-            <div data-aos="fade-up" data-aos-delay="200" class="lg:col-span-7 paper-card rounded-2xl relative overflow-hidden flex flex-col justify-end p-6 min-h-[400px]">
-                
-                <!-- The Slideshow -->
-                <div class="slideshow-wrapper rounded-xl overflow-hidden">
+            <!-- Cinematic Slideshow Background block -->
+            <div class="relative w-full aspect-[4/5] md:aspect-square overflow-hidden border-delicate p-2" data-aos="fade-left">
+                <div class="slideshow-wrapper">
+                    <!-- IMAGES 3,4,5 -->
                     <img loading="lazy" src="images/slideshow-1.jpg" onerror="this.src='https://images.unsplash.com/photo-1549488344-1f9b8d2bd1f3?q=80&w=1200&auto=format&fit=crop'" alt="Slide 1">
                     <img loading="lazy" src="images/slideshow-2.jpg" onerror="this.src='https://images.unsplash.com/photo-1522083111874-9842aeb049f5?q=80&w=1200&auto=format&fit=crop'" alt="Slide 2">
                     <img loading="lazy" src="images/slideshow-3.jpg" onerror="this.src='https://images.unsplash.com/photo-1511818966892-d7d671e672a2?q=80&w=1200&auto=format&fit=crop'" alt="Slide 3">
                 </div>
-                
-                <!-- Dark gradient overlay for text -->
-                <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent z-10 pointer-events-none"></div>
+            </div>
 
-                <div class="relative z-20 text-center p-4">
-                    <h3 class="text-2xl font-serif text-white mb-4 italic">Interests & Hobbies</h3>
-                    <div class="flex flex-wrap justify-center gap-2">
-                        <span class="bg-white/20 backdrop-blur border border-white/30 px-3 py-1.5 rounded text-xs text-white uppercase tracking-wider">🌍 Traveling</span>
-                        <span class="bg-white/20 backdrop-blur border border-white/30 px-3 py-1.5 rounded text-xs text-white uppercase tracking-wider">📸 Photography</span>
-                        <span class="bg-white/20 backdrop-blur border border-white/30 px-3 py-1.5 rounded text-xs text-white uppercase tracking-wider">💻 Coding</span>
-                        <span class="bg-white/20 backdrop-blur border border-white/30 px-3 py-1.5 rounded text-xs text-white uppercase tracking-wider">📈 Trading</span>
-                    </div>
+        </div>
+    </section>
+
+    <!-- SLIDE 5: Chapter 04 - The Art Wall (Seamless Gallery) -->
+    <section class="relative w-full py-24 md:py-32 bg-lux-surface">
+        <div class="watermark top-10 right-0 translate-x-1/4">04</div>
+        
+        <div class="w-full px-2 md:px-6 mx-auto relative z-10">
+            <div class="text-center mb-16 md:mb-24" data-aos="fade-up">
+                <h2 class="text-4xl md:text-6xl font-serif text-lux-pearl mb-4">A Visual <span class="italic text-lux-gold">Narrative</span></h2>
+                <div class="w-12 h-[1px] bg-lux-gold mx-auto"></div>
+            </div>
+
+            <!-- BORDERLESS ASYMMETRICAL GRID (No cards, just pure imagery) -->
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-2 md:gap-3 auto-rows-[150px] md:auto-rows-[250px] grid-flow-row-dense" data-aos="fade-up">
+                
+                <!-- IMAGE 6 -->
+                <div class="col-span-2 row-span-2 overflow-hidden group">
+                    <img loading="lazy" src="images/gallery-1.jpg" onerror="this.src='https://images.unsplash.com/photo-1551043047-1d2adf00f3fd?q=80&w=1000&auto=format&fit=crop'" class="w-full h-full object-cover art-img">
+                </div>
+                <!-- IMAGE 7 -->
+                <div class="col-span-1 row-span-1 overflow-hidden group">
+                    <img loading="lazy" src="images/gallery-2.jpg" onerror="this.src='https://images.unsplash.com/photo-1498654896293-37aacf113fd9?q=80&w=600&auto=format&fit=crop'" class="w-full h-full object-cover art-img">
+                </div>
+                <!-- IMAGE 8 -->
+                <div class="col-span-1 row-span-2 overflow-hidden group">
+                    <img loading="lazy" src="images/gallery-3.jpg" onerror="this.src='https://images.unsplash.com/photo-1558981403-c5f9899a28bc?q=80&w=600&auto=format&fit=crop'" class="w-full h-full object-cover art-img">
+                </div>
+                <!-- IMAGE 9 -->
+                <div class="col-span-1 row-span-1 overflow-hidden group">
+                    <img loading="lazy" src="images/gallery-4.jpg" onerror="this.src='https://images.unsplash.com/photo-1507525428034-b723cf961d3e?q=80&w=600&auto=format&fit=crop'" class="w-full h-full object-cover art-img">
+                </div>
+                <!-- IMAGE 10 -->
+                <div class="col-span-2 row-span-1 overflow-hidden group">
+                    <img loading="lazy" src="images/gallery-5.jpg" onerror="this.src='https://images.unsplash.com/photo-1549488344-1f9b8d2bd1f3?q=80&w=1000&auto=format&fit=crop'" class="w-full h-full object-cover art-img">
+                </div>
+                <!-- IMAGE 11 -->
+                <div class="col-span-1 row-span-2 overflow-hidden group">
+                    <img loading="lazy" src="images/gallery-6.jpg" onerror="this.src='https://images.unsplash.com/photo-1522083111874-9842aeb049f5?q=80&w=600&auto=format&fit=crop'" class="w-full h-full object-cover art-img">
+                </div>
+                <!-- IMAGE 12 -->
+                <div class="col-span-1 row-span-1 overflow-hidden group">
+                    <img loading="lazy" src="images/gallery-7.jpg" onerror="this.src='https://images.unsplash.com/photo-1498654896293-37aacf113fd9?q=80&w=600&auto=format&fit=crop'" class="w-full h-full object-cover art-img">
+                </div>
+                <!-- IMAGE 13 -->
+                <div class="col-span-1 row-span-1 overflow-hidden group">
+                    <img loading="lazy" src="images/gallery-8.jpg" onerror="this.src='https://images.unsplash.com/photo-1511818966892-d7d671e672a2?q=80&w=600&auto=format&fit=crop'" class="w-full h-full object-cover art-img">
+                </div>
+                <!-- IMAGE 14 -->
+                <div class="col-span-1 row-span-1 overflow-hidden group">
+                    <img loading="lazy" src="images/gallery-9.jpg" onerror="this.src='https://images.unsplash.com/photo-1507525428034-b723cf961d3e?q=80&w=600&auto=format&fit=crop'" class="w-full h-full object-cover art-img">
+                </div>
+                <!-- IMAGE 15 -->
+                <div class="col-span-2 row-span-2 overflow-hidden group">
+                    <img loading="lazy" src="images/gallery-10.jpg" onerror="this.src='https://images.unsplash.com/photo-1551043047-1d2adf00f3fd?q=80&w=1200&auto=format&fit=crop'" class="w-full h-full object-cover art-img">
+                </div>
+                <!-- IMAGE 16 -->
+                <div class="col-span-1 row-span-1 overflow-hidden group">
+                    <img loading="lazy" src="images/gallery-11.jpg" onerror="this.src='https://images.unsplash.com/photo-1498654896293-37aacf113fd9?q=80&w=600&auto=format&fit=crop'" class="w-full h-full object-cover art-img">
+                </div>
+                <!-- IMAGE 17 -->
+                <div class="col-span-1 row-span-1 overflow-hidden group">
+                    <img loading="lazy" src="images/gallery-12.jpg" onerror="this.src='https://images.unsplash.com/photo-1498654896293-37aacf113fd9?q=80&w=600&auto=format&fit=crop'" class="w-full h-full object-cover art-img">
+                </div>
+                <!-- IMAGE 18 -->
+                <div class="col-span-1 row-span-2 overflow-hidden group">
+                    <img loading="lazy" src="images/gallery-13.jpg" onerror="this.src='https://images.unsplash.com/photo-1558981403-c5f9899a28bc?q=80&w=600&auto=format&fit=crop'" class="w-full h-full object-cover art-img">
+                </div>
+                <!-- IMAGE 19 -->
+                <div class="col-span-1 row-span-1 overflow-hidden group">
+                    <img loading="lazy" src="images/gallery-14.jpg" onerror="this.src='https://images.unsplash.com/photo-1507525428034-b723cf961d3e?q=80&w=600&auto=format&fit=crop'" class="w-full h-full object-cover art-img">
+                </div>
+                <!-- IMAGE 20 -->
+                <div class="col-span-2 row-span-1 overflow-hidden group">
+                    <img loading="lazy" src="images/gallery-15.jpg" onerror="this.src='https://images.unsplash.com/photo-1549488344-1f9b8d2bd1f3?q=80&w=1000&auto=format&fit=crop'" class="w-full h-full object-cover art-img">
+                </div>
+                <!-- IMAGE 21 -->
+                <div class="col-span-2 md:col-span-4 row-span-1 overflow-hidden group relative flex items-center justify-center border-y border-lux-gold/20 py-20 mt-10">
+                    <img loading="lazy" src="images/gallery-16.jpg" onerror="this.src='https://images.unsplash.com/photo-1522083111874-9842aeb049f5?q=80&w=1500&auto=format&fit=crop'" class="absolute inset-0 w-full h-full object-cover opacity-20 art-img">
+                    <h2 class="text-4xl md:text-6xl font-serif text-lux-gold italic z-10 relative px-4 text-center">Thank you for viewing.</h2>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- SLIDE 5: The Editorial Photo Grid (Images 6 to 21) -->
-    <section class="relative w-full px-4 md:px-6 mb-24">
-        <div class="max-w-7xl mx-auto paper-card p-6 md:p-10 rounded-2xl">
+    <!-- SLIDE 6: The Epilogue (Contact) -->
+    <section class="relative w-full py-24 md:py-40 px-6 text-center border-t border-lux-gold/10">
+        <div class="max-w-4xl mx-auto" data-aos="zoom-in">
+            <h2 class="text-4xl md:text-6xl font-serif text-lux-pearl mb-6">Begin a <span class="italic text-lux-gold">Conversation</span></h2>
+            <p class="text-lux-muted mb-16 font-light">Available for correspondence in India and Europe.</p>
             
-            <div class="text-center mb-10 md:mb-16" data-aos="fade-up">
-                <h2 class="text-4xl md:text-5xl font-serif text-brand-wine mb-2">My Life in Pictures</h2>
-                <p class="text-gray-500 font-light text-sm uppercase tracking-widest">Malta • Travel • Lifestyle</p>
-                <div class="w-16 h-[2px] bg-brand-sand mx-auto mt-6"></div>
-            </div>
-
-            <!-- Very clean, sharp-edged Pinterest style grid -->
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-2 md:gap-3 auto-rows-[120px] md:auto-rows-[200px] grid-flow-row-dense" data-aos="fade-up">
-                
-                <!-- IMAGE 6: Wide -->
-                <div class="col-span-2 row-span-1 overflow-hidden relative group">
-                    <img loading="lazy" src="images/gallery-1.jpg" onerror="this.src='https://images.unsplash.com/photo-1551043047-1d2adf00f3fd?q=80&w=1000&auto=format&fit=crop'" class="w-full h-full object-cover transition duration-700 hover:scale-105 filter grayscale-[20%] hover:grayscale-0">
+            <div class="flex flex-col md:flex-row justify-center items-center gap-12 md:gap-20">
+                <div class="group cursor-pointer">
+                    <p class="text-lux-gold text-[10px] uppercase tracking-[0.2em] font-bold mb-3 transition group-hover:text-lux-pearl">India / Family</p>
+                    <p class="text-2xl font-serif text-lux-pearl transition group-hover:text-lux-gold">+91 63533 36958</p>
                 </div>
                 
-                <!-- IMAGE 7: Square -->
-                <div class="col-span-1 overflow-hidden relative group">
-                    <img loading="lazy" src="images/gallery-2.jpg" onerror="this.src='https://images.unsplash.com/photo-1498654896293-37aacf113fd9?q=80&w=600&auto=format&fit=crop'" class="w-full h-full object-cover transition duration-700 hover:scale-105 filter grayscale-[20%] hover:grayscale-0">
-                </div>
-
-                <!-- IMAGE 8: Tall -->
-                <div class="col-span-1 row-span-2 overflow-hidden relative group">
-                    <img loading="lazy" src="images/gallery-3.jpg" onerror="this.src='https://images.unsplash.com/photo-1558981403-c5f9899a28bc?q=80&w=600&auto=format&fit=crop'" class="w-full h-full object-cover transition duration-700 hover:scale-105 filter grayscale-[20%] hover:grayscale-0">
-                </div>
-
-                <!-- IMAGE 9: Large Square -->
-                <div class="col-span-2 row-span-2 overflow-hidden relative group">
-                    <img loading="lazy" src="images/gallery-4.jpg" onerror="this.src='https://images.unsplash.com/photo-1549488344-1f9b8d2bd1f3?q=80&w=1000&auto=format&fit=crop'" class="w-full h-full object-cover transition duration-700 hover:scale-105 filter grayscale-[20%] hover:grayscale-0">
-                </div>
-
-                <!-- IMAGE 10: Square -->
-                <div class="col-span-1 overflow-hidden relative group">
-                    <img loading="lazy" src="images/gallery-5.jpg" onerror="this.src='https://images.unsplash.com/photo-1507525428034-b723cf961d3e?q=80&w=600&auto=format&fit=crop'" class="w-full h-full object-cover transition duration-700 hover:scale-105 filter grayscale-[20%] hover:grayscale-0">
-                </div>
-
-                <!-- IMAGE 11: Tall -->
-                <div class="col-span-1 row-span-2 overflow-hidden relative group">
-                    <img loading="lazy" src="images/gallery-6.jpg" onerror="this.src='https://images.unsplash.com/photo-1522083111874-9842aeb049f5?q=80&w=600&auto=format&fit=crop'" class="w-full h-full object-cover transition duration-700 hover:scale-105 filter grayscale-[20%] hover:grayscale-0">
-                </div>
-
-                <!-- IMAGE 12: Square -->
-                <div class="col-span-1 overflow-hidden relative group">
-                    <img loading="lazy" src="images/gallery-7.jpg" onerror="this.src='https://images.unsplash.com/photo-1498654896293-37aacf113fd9?q=80&w=600&auto=format&fit=crop'" class="w-full h-full object-cover transition duration-700 hover:scale-105 filter grayscale-[20%] hover:grayscale-0">
-                </div>
-
-                <!-- IMAGE 13: Square -->
-                <div class="col-span-1 overflow-hidden relative group">
-                    <img loading="lazy" src="images/gallery-8.jpg" onerror="this.src='https://images.unsplash.com/photo-1511818966892-d7d671e672a2?q=80&w=600&auto=format&fit=crop'" class="w-full h-full object-cover transition duration-700 hover:scale-105 filter grayscale-[20%] hover:grayscale-0">
-                </div>
-
-                <!-- IMAGE 14: Wide -->
-                <div class="col-span-2 row-span-1 overflow-hidden relative group">
-                    <img loading="lazy" src="images/gallery-9.jpg" onerror="this.src='https://images.unsplash.com/photo-1551043047-1d2adf00f3fd?q=80&w=1000&auto=format&fit=crop'" class="w-full h-full object-cover transition duration-700 hover:scale-105 filter grayscale-[20%] hover:grayscale-0">
-                </div>
-
-                <!-- IMAGE 15: Square -->
-                <div class="col-span-1 overflow-hidden relative group">
-                    <img loading="lazy" src="images/gallery-10.jpg" onerror="this.src='https://images.unsplash.com/photo-1498654896293-37aacf113fd9?q=80&w=600&auto=format&fit=crop'" class="w-full h-full object-cover transition duration-700 hover:scale-105 filter grayscale-[20%] hover:grayscale-0">
-                </div>
-
-                <!-- IMAGE 16: Square -->
-                <div class="col-span-1 overflow-hidden relative group">
-                    <img loading="lazy" src="images/gallery-11.jpg" onerror="this.src='https://images.unsplash.com/photo-1507525428034-b723cf961d3e?q=80&w=600&auto=format&fit=crop'" class="w-full h-full object-cover transition duration-700 hover:scale-105 filter grayscale-[20%] hover:grayscale-0">
-                </div>
-
-                <!-- IMAGE 17: Large Block -->
-                <div class="col-span-2 row-span-2 overflow-hidden relative group">
-                    <img loading="lazy" src="images/gallery-12.jpg" onerror="this.src='https://images.unsplash.com/photo-1549488344-1f9b8d2bd1f3?q=80&w=1000&auto=format&fit=crop'" class="w-full h-full object-cover transition duration-700 hover:scale-105 filter grayscale-[20%] hover:grayscale-0">
-                </div>
-
-                <!-- IMAGE 18: Tall -->
-                <div class="col-span-1 row-span-2 overflow-hidden relative group">
-                    <img loading="lazy" src="images/gallery-13.jpg" onerror="this.src='https://images.unsplash.com/photo-1558981403-c5f9899a28bc?q=80&w=600&auto=format&fit=crop'" class="w-full h-full object-cover transition duration-700 hover:scale-105 filter grayscale-[20%] hover:grayscale-0">
-                </div>
-
-                <!-- IMAGE 19: Square -->
-                <div class="col-span-1 overflow-hidden relative group">
-                    <img loading="lazy" src="images/gallery-14.jpg" onerror="this.src='https://images.unsplash.com/photo-1498654896293-37aacf113fd9?q=80&w=600&auto=format&fit=crop'" class="w-full h-full object-cover transition duration-700 hover:scale-105 filter grayscale-[20%] hover:grayscale-0">
+                <div class="hidden md:block w-[1px] h-12 bg-lux-gold/20"></div>
+                
+                <div class="group cursor-pointer">
+                    <p class="text-lux-gold text-[10px] uppercase tracking-[0.2em] font-bold mb-3 transition group-hover:text-lux-pearl">Malta / Direct</p>
+                    <p class="text-2xl font-serif text-lux-pearl transition group-hover:text-lux-gold">+356 9979 4792</p>
                 </div>
                 
-                <!-- IMAGE 20: Square -->
-                <div class="col-span-1 overflow-hidden relative group">
-                    <img loading="lazy" src="images/gallery-15.jpg" onerror="this.src='https://images.unsplash.com/photo-1507525428034-b723cf961d3e?q=80&w=600&auto=format&fit=crop'" class="w-full h-full object-cover transition duration-700 hover:scale-105 filter grayscale-[20%] hover:grayscale-0">
-                </div>
+                <div class="hidden md:block w-[1px] h-12 bg-lux-gold/20"></div>
 
-                <!-- IMAGE 21 (Final): Wide Block -->
-                <div class="col-span-2 md:col-span-4 aspect-[3/1] md:aspect-[5/1] overflow-hidden relative group bg-brand-wine flex items-center justify-center">
-                    <img loading="lazy" src="images/gallery-16.jpg" onerror="this.src='https://images.unsplash.com/photo-1551043047-1d2adf00f3fd?q=80&w=1500&auto=format&fit=crop'" class="absolute inset-0 w-full h-full object-cover opacity-30 mix-blend-overlay">
-                    <p class="text-brand-cream font-serif italic text-lg md:text-2xl z-10 relative">Thank you for viewing</p>
+                <div class="group cursor-pointer">
+                    <p class="text-lux-gold text-[10px] uppercase tracking-[0.2em] font-bold mb-3 transition group-hover:text-lux-pearl">Email</p>
+                    <p class="text-lg md:text-xl font-serif text-lux-pearl transition group-hover:text-lux-gold"><a href="mailto:vrajpanchal7123@gmail.com">vrajpanchal7123@gmail.com</a></p>
                 </div>
-
             </div>
         </div>
     </section>
 
-    <!-- SLIDE 6: Contact Section -->
-    <section class="relative w-full px-4 md:px-6">
-        <div class="max-w-4xl mx-auto paper-card p-8 md:p-14 rounded-2xl text-center border-t-8 border-brand-sand" data-aos="fade-up">
-            <h2 class="text-3xl md:text-5xl font-serif text-brand-wine mb-4">Let's Connect</h2>
-            <p class="text-gray-500 mb-10 font-light text-sm md:text-base">We welcome further conversation.</p>
-            
-            <div class="flex flex-col md:flex-row justify-center items-center gap-4 md:gap-8">
-                <!-- Phone India -->
-                <div class="bg-brand-cream border border-gray-200 p-5 rounded-xl w-full max-w-[280px]">
-                    <i class="fa-solid fa-phone text-brand-wine text-xl mb-2"></i>
-                    <p class="text-[10px] uppercase tracking-widest text-gray-400 font-bold mb-1">India / Family</p>
-                    <p class="text-lg font-medium text-brand-charcoal">+91 63533 36958</p>
-                </div>
-                
-                <!-- Phone Malta -->
-                <div class="bg-brand-cream border border-gray-200 p-5 rounded-xl w-full max-w-[280px]">
-                    <i class="fa-solid fa-globe text-brand-wine text-xl mb-2"></i>
-                    <p class="text-[10px] uppercase tracking-widest text-gray-400 font-bold mb-1">Malta / Direct</p>
-                    <p class="text-lg font-medium text-brand-charcoal">+356 9979 4792</p>
-                </div>
-                
-                <!-- Email -->
-                <div class="bg-brand-cream border border-gray-200 p-5 rounded-xl w-full max-w-[280px]">
-                    <i class="fa-solid fa-envelope text-brand-wine text-xl mb-2"></i>
-                    <p class="text-[10px] uppercase tracking-widest text-gray-400 font-bold mb-1">Email</p>
-                    <p class="text-sm font-medium text-brand-charcoal truncate"><a href="mailto:vrajpanchal7123@gmail.com">vrajpanchal7123@gmail.com</a></p>
-                </div>
-            </div>
-        </div>
-    </section>
+    <!-- Minimalist Footer -->
+    <footer class="text-center py-10 relative z-20">
+        <p class="text-[10px] text-lux-muted/50 tracking-[0.3em] uppercase font-bold">Created By Mr. Vraj N. Panchal</p>
+    </footer>
 
 </div> <!-- END MASTER WRAPPER -->
-
-    <!-- Footer -->
-    <footer class="text-center py-6 pb-8 relative z-20 bg-brand-cream border-t border-gray-200">
-        <p class="text-[10px] md:text-xs text-gray-400 tracking-widest uppercase font-medium">Created By Mr. Vraj N. Panchal</p>
-    </footer>
 
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
         AOS.init({ 
             once: false, 
             offset: 40,
-            duration: 1000, 
+            duration: 1200, 
             easing: 'ease-out-cubic' 
         });
     </script>
