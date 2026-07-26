@@ -45,7 +45,6 @@
             background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
         }
 
-        /* Adjusted zoom to be softer so it doesn't crop the image too much */
         .hero-zoom { animation: slowZoom 30s ease-in-out infinite alternate; }
         @keyframes slowZoom {
             0% { transform: scale(1); }
@@ -75,14 +74,13 @@
             100% { opacity: 0; transform: scale(1.05); }
         }
 
-        .art-img { transition: filter 0.6s ease, transform 1s ease; filter: grayscale(35%); }
-        .group:hover .art-img { filter: grayscale(0%); transform: scale(1.04); }
+        .art-img { transition: filter 0.6s ease, transform 1s ease; filter: grayscale(20%); }
+        .group:hover .art-img { filter: grayscale(0%); transform: scale(1.03); }
         .border-delicate { border: 1px solid rgba(212, 175, 55, 0.15); }
     </style>
 </head>
 <body class="antialiased selection:bg-lux-gold selection:text-lux-base">
 
-<!-- Permanent Film Grain Overlay -->
 <div class="film-grain"></div>
 
 <div class="w-full overflow-hidden relative">
@@ -91,7 +89,6 @@
 
     <!-- SLIDE 1: The Immersive Hero -->
     <section class="relative w-full h-[100dvh] flex items-end justify-center pb-16 md:pb-24 px-4 md:px-6 overflow-hidden">
-        <!-- FIXED: Added 'object-top' to ensure the face is never cropped! -->
         <div class="absolute inset-0 w-full h-full z-0 overflow-hidden bg-lux-base">
             <img src="images/hero-bg.jpg" onerror="this.src='https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?q=80&w=2000&auto=format&fit=crop'" class="w-full h-full object-cover object-top hero-zoom opacity-80" alt="Hero">
             <div class="absolute inset-0 bg-gradient-to-t from-lux-base via-lux-base/60 to-transparent"></div>
@@ -106,8 +103,7 @@
                     <p class="text-lux-gold text-[9px] md:text-xs tracking-[0.3em] uppercase font-semibold">॥ OM Shree Ganeshay Namah ॥</p>
                     <div class="hidden md:block w-12 h-[1px] bg-lux-gold"></div>
                 </div>
-                <!-- Scaled down font size for mobile screens -->
-                <h1 class="text-[3.5rem] leading-[1] md:text-[7rem] lg:text-[9rem] font-serif tracking-wide text-lux-pearl drop-shadow-2xl">
+                <h1 class="text-[4rem] leading-[1] md:text-[7rem] lg:text-[9rem] font-serif tracking-wide text-lux-pearl drop-shadow-2xl">
                     VRAJ<br>
                     <span class="italic text-lux-gold md:ml-16">PANCHAL</span>
                 </h1>
@@ -147,7 +143,6 @@
                     The <span class="italic text-lux-gold">Persona</span>
                 </h2>
                 
-                <!-- Mobile Optimized Grid -->
                 <div class="grid grid-cols-2 gap-y-8 md:gap-y-12 gap-x-4 md:gap-x-8 text-left">
                     <div class="border-t border-lux-gold/20 pt-4 md:pt-5">
                         <p class="text-lux-muted text-[9px] md:text-[10px] uppercase tracking-[0.2em] font-bold mb-2 md:mb-3">Born</p>
@@ -252,6 +247,7 @@
                 </div>
             </div>
 
+            <!-- Cinematic Slideshow -->
             <div class="lg:col-span-6 relative w-full aspect-square md:aspect-[4/5] overflow-hidden border-delicate p-2 rounded-2xl bg-lux-surface mt-8 md:mt-0" data-aos="fade-up" data-aos-duration="1500">
                 <div class="slideshow-wrapper rounded-xl overflow-hidden">
                     <img loading="lazy" src="images/slideshow-1.jpg" onerror="this.src='https://images.unsplash.com/photo-1549488344-1f9b8d2bd1f3?q=80&w=1200&auto=format&fit=crop'" alt="Slide 1">
@@ -263,88 +259,77 @@
         </div>
     </section>
 
-    <!-- SLIDE 5: Chapter 04 - The Art Wall (THE FIXED SOLID GRID) -->
+    <!-- SLIDE 5: Chapter 04 - The Art Wall (THE PERFECT CSS COLUMN MASONRY) -->
     <section class="relative w-full py-20 md:py-32 bg-lux-surface/50">
         <div class="watermark top-10 right-0 translate-x-1/4">04</div>
         
         <div class="w-full px-4 md:px-6 mx-auto relative z-10">
-            <div class="text-center mb-12 md:mb-24" data-aos="fade-up">
+            <div class="text-center mb-12 md:mb-20" data-aos="fade-up">
                 <p class="text-lux-gold text-[10px] md:text-xs uppercase tracking-[0.3em] mb-2 md:mb-4">Chapter 04</p>
                 <h2 class="text-4xl md:text-7xl font-serif text-lux-pearl mb-4 md:mb-6">A Visual <span class="italic text-lux-gold">Narrative</span></h2>
                 <div class="w-12 md:w-16 h-[1px] bg-lux-gold mx-auto"></div>
             </div>
 
-            <!-- ROCK SOLID CSS GRID (No empty gaps, perfect on mobile and desktop) -->
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-2 md:gap-4 max-w-7xl mx-auto grid-flow-row-dense" data-aos="fade-up">
+            <!-- NEW TRUE MASONRY CSS COLUMNS (Images will NEVER be cropped awkwardly) -->
+            <div class="columns-2 md:columns-3 lg:columns-4 gap-3 md:gap-4 space-y-3 md:space-y-4 max-w-7xl mx-auto" data-aos="fade-up">
                 
-                <!-- Use aspect ratios to control shape without breaking the grid -->
-                <div class="col-span-1 aspect-[3/4] group overflow-hidden rounded-xl border-delicate bg-lux-surface">
-                    <img loading="lazy" src="images/gallery-1.jpg" onerror="this.src='https://images.unsplash.com/photo-1551043047-1d2adf00f3fd?q=80&w=600&auto=format&fit=crop'" class="w-full h-full object-cover art-img">
+                <!-- Images 6 to 20 -->
+                <!-- Each image is wrapped in a 'break-inside-avoid' container so they stack cleanly without splitting -->
+                <div class="break-inside-avoid group overflow-hidden rounded-xl border-delicate bg-lux-surface relative">
+                    <img loading="lazy" src="images/gallery-1.jpg" onerror="this.src='https://images.unsplash.com/photo-1551043047-1d2adf00f3fd?q=80&w=600&auto=format&fit=crop'" class="w-full h-auto art-img">
                 </div>
-                
-                <div class="col-span-1 aspect-square group overflow-hidden rounded-xl border-delicate bg-lux-surface">
-                    <img loading="lazy" src="images/gallery-2.jpg" onerror="this.src='https://images.unsplash.com/photo-1498654896293-37aacf113fd9?q=80&w=600&auto=format&fit=crop'" class="w-full h-full object-cover art-img">
+                <div class="break-inside-avoid group overflow-hidden rounded-xl border-delicate bg-lux-surface relative">
+                    <img loading="lazy" src="images/gallery-2.jpg" onerror="this.src='https://images.unsplash.com/photo-1498654896293-37aacf113fd9?q=80&w=600&auto=format&fit=crop'" class="w-full h-auto art-img">
                 </div>
-
-                <div class="col-span-2 aspect-video group overflow-hidden rounded-xl border-delicate bg-lux-surface">
-                    <img loading="lazy" src="images/gallery-3.jpg" onerror="this.src='https://images.unsplash.com/photo-1558981403-c5f9899a28bc?q=80&w=1000&auto=format&fit=crop'" class="w-full h-full object-cover art-img">
+                <div class="break-inside-avoid group overflow-hidden rounded-xl border-delicate bg-lux-surface relative">
+                    <img loading="lazy" src="images/gallery-3.jpg" onerror="this.src='https://images.unsplash.com/photo-1558981403-c5f9899a28bc?q=80&w=600&auto=format&fit=crop'" class="w-full h-auto art-img">
                 </div>
-
-                <div class="col-span-2 row-span-2 md:col-span-2 md:row-span-2 group overflow-hidden rounded-xl border-delicate bg-lux-surface">
-                    <img loading="lazy" src="images/gallery-4.jpg" onerror="this.src='https://images.unsplash.com/photo-1549488344-1f9b8d2bd1f3?q=80&w=1000&auto=format&fit=crop'" class="w-full h-full object-cover art-img">
+                <div class="break-inside-avoid group overflow-hidden rounded-xl border-delicate bg-lux-surface relative">
+                    <img loading="lazy" src="images/gallery-4.jpg" onerror="this.src='https://images.unsplash.com/photo-1507525428034-b723cf961d3e?q=80&w=600&auto=format&fit=crop'" class="w-full h-auto art-img">
                 </div>
-
-                <div class="col-span-1 aspect-square group overflow-hidden rounded-xl border-delicate bg-lux-surface">
-                    <img loading="lazy" src="images/gallery-5.jpg" onerror="this.src='https://images.unsplash.com/photo-1507525428034-b723cf961d3e?q=80&w=600&auto=format&fit=crop'" class="w-full h-full object-cover art-img">
+                <div class="break-inside-avoid group overflow-hidden rounded-xl border-delicate bg-lux-surface relative">
+                    <img loading="lazy" src="images/gallery-5.jpg" onerror="this.src='https://images.unsplash.com/photo-1549488344-1f9b8d2bd1f3?q=80&w=800&auto=format&fit=crop'" class="w-full h-auto art-img">
                 </div>
-
-                <div class="col-span-1 aspect-[3/4] group overflow-hidden rounded-xl border-delicate bg-lux-surface">
-                    <img loading="lazy" src="images/gallery-6.jpg" onerror="this.src='https://images.unsplash.com/photo-1522083111874-9842aeb049f5?q=80&w=600&auto=format&fit=crop'" class="w-full h-full object-cover art-img">
+                <div class="break-inside-avoid group overflow-hidden rounded-xl border-delicate bg-lux-surface relative">
+                    <img loading="lazy" src="images/gallery-6.jpg" onerror="this.src='https://images.unsplash.com/photo-1522083111874-9842aeb049f5?q=80&w=600&auto=format&fit=crop'" class="w-full h-auto art-img">
                 </div>
-
-                <div class="col-span-1 aspect-square group overflow-hidden rounded-xl border-delicate bg-lux-surface">
-                    <img loading="lazy" src="images/gallery-7.jpg" onerror="this.src='https://images.unsplash.com/photo-1498654896293-37aacf113fd9?q=80&w=600&auto=format&fit=crop'" class="w-full h-full object-cover art-img">
+                <div class="break-inside-avoid group overflow-hidden rounded-xl border-delicate bg-lux-surface relative">
+                    <img loading="lazy" src="images/gallery-7.jpg" onerror="this.src='https://images.unsplash.com/photo-1498654896293-37aacf113fd9?q=80&w=600&auto=format&fit=crop'" class="w-full h-auto art-img">
                 </div>
-
-                <div class="col-span-1 aspect-square group overflow-hidden rounded-xl border-delicate bg-lux-surface">
-                    <img loading="lazy" src="images/gallery-8.jpg" onerror="this.src='https://images.unsplash.com/photo-1511818966892-d7d671e672a2?q=80&w=600&auto=format&fit=crop'" class="w-full h-full object-cover art-img">
+                <div class="break-inside-avoid group overflow-hidden rounded-xl border-delicate bg-lux-surface relative">
+                    <img loading="lazy" src="images/gallery-8.jpg" onerror="this.src='https://images.unsplash.com/photo-1511818966892-d7d671e672a2?q=80&w=600&auto=format&fit=crop'" class="w-full h-auto art-img">
                 </div>
-
-                <div class="col-span-2 aspect-video group overflow-hidden rounded-xl border-delicate bg-lux-surface">
-                    <img loading="lazy" src="images/gallery-9.jpg" onerror="this.src='https://images.unsplash.com/photo-1551043047-1d2adf00f3fd?q=80&w=1000&auto=format&fit=crop'" class="w-full h-full object-cover art-img">
+                <div class="break-inside-avoid group overflow-hidden rounded-xl border-delicate bg-lux-surface relative">
+                    <img loading="lazy" src="images/gallery-9.jpg" onerror="this.src='https://images.unsplash.com/photo-1551043047-1d2adf00f3fd?q=80&w=1000&auto=format&fit=crop'" class="w-full h-auto art-img">
                 </div>
-
-                <div class="col-span-1 aspect-square group overflow-hidden rounded-xl border-delicate bg-lux-surface">
-                    <img loading="lazy" src="images/gallery-10.jpg" onerror="this.src='https://images.unsplash.com/photo-1498654896293-37aacf113fd9?q=80&w=600&auto=format&fit=crop'" class="w-full h-full object-cover art-img">
+                <div class="break-inside-avoid group overflow-hidden rounded-xl border-delicate bg-lux-surface relative">
+                    <img loading="lazy" src="images/gallery-10.jpg" onerror="this.src='https://images.unsplash.com/photo-1498654896293-37aacf113fd9?q=80&w=600&auto=format&fit=crop'" class="w-full h-auto art-img">
                 </div>
-
-                <div class="col-span-1 aspect-[3/4] group overflow-hidden rounded-xl border-delicate bg-lux-surface">
-                    <img loading="lazy" src="images/gallery-11.jpg" onerror="this.src='https://images.unsplash.com/photo-1507525428034-b723cf961d3e?q=80&w=600&auto=format&fit=crop'" class="w-full h-full object-cover art-img">
+                <div class="break-inside-avoid group overflow-hidden rounded-xl border-delicate bg-lux-surface relative">
+                    <img loading="lazy" src="images/gallery-11.jpg" onerror="this.src='https://images.unsplash.com/photo-1507525428034-b723cf961d3e?q=80&w=600&auto=format&fit=crop'" class="w-full h-auto art-img">
                 </div>
-
-                <div class="col-span-2 row-span-2 md:col-span-2 md:row-span-2 group overflow-hidden rounded-xl border-delicate bg-lux-surface">
-                    <img loading="lazy" src="images/gallery-12.jpg" onerror="this.src='https://images.unsplash.com/photo-1549488344-1f9b8d2bd1f3?q=80&w=1000&auto=format&fit=crop'" class="w-full h-full object-cover art-img">
+                <div class="break-inside-avoid group overflow-hidden rounded-xl border-delicate bg-lux-surface relative">
+                    <img loading="lazy" src="images/gallery-12.jpg" onerror="this.src='https://images.unsplash.com/photo-1549488344-1f9b8d2bd1f3?q=80&w=800&auto=format&fit=crop'" class="w-full h-auto art-img">
                 </div>
-
-                <div class="col-span-1 aspect-square group overflow-hidden rounded-xl border-delicate bg-lux-surface">
-                    <img loading="lazy" src="images/gallery-13.jpg" onerror="this.src='https://images.unsplash.com/photo-1558981403-c5f9899a28bc?q=80&w=600&auto=format&fit=crop'" class="w-full h-full object-cover art-img">
+                <div class="break-inside-avoid group overflow-hidden rounded-xl border-delicate bg-lux-surface relative">
+                    <img loading="lazy" src="images/gallery-13.jpg" onerror="this.src='https://images.unsplash.com/photo-1558981403-c5f9899a28bc?q=80&w=600&auto=format&fit=crop'" class="w-full h-auto art-img">
                 </div>
-
-                <div class="col-span-1 aspect-square group overflow-hidden rounded-xl border-delicate bg-lux-surface">
-                    <img loading="lazy" src="images/gallery-14.jpg" onerror="this.src='https://images.unsplash.com/photo-1498654896293-37aacf113fd9?q=80&w=600&auto=format&fit=crop'" class="w-full h-full object-cover art-img">
+                <div class="break-inside-avoid group overflow-hidden rounded-xl border-delicate bg-lux-surface relative">
+                    <img loading="lazy" src="images/gallery-14.jpg" onerror="this.src='https://images.unsplash.com/photo-1498654896293-37aacf113fd9?q=80&w=600&auto=format&fit=crop'" class="w-full h-auto art-img">
                 </div>
-                
-                <div class="col-span-2 aspect-[3/1] md:aspect-video group overflow-hidden rounded-xl border-delicate bg-lux-surface">
-                    <img loading="lazy" src="images/gallery-15.jpg" onerror="this.src='https://images.unsplash.com/photo-1507525428034-b723cf961d3e?q=80&w=1000&auto=format&fit=crop'" class="w-full h-full object-cover art-img">
-                </div>
-
-                <!-- IMAGE 16 (Final Thank You Banner) - FIXED border artifact and sizing! -->
-                <div class="col-span-2 md:col-span-4 min-h-[150px] md:min-h-[300px] overflow-hidden rounded-xl group relative flex items-center justify-center bg-lux-base mt-2 md:mt-4">
-                    <img loading="lazy" src="images/gallery-16.jpg" onerror="this.src='https://images.unsplash.com/photo-1522083111874-9842aeb049f5?q=80&w=1500&auto=format&fit=crop'" class="absolute inset-0 w-full h-full object-cover opacity-30 art-img">
-                    <h2 class="text-3xl md:text-5xl lg:text-6xl font-serif text-lux-gold italic z-10 relative px-4 text-center drop-shadow-2xl">Thank you for viewing.</h2>
+                <div class="break-inside-avoid group overflow-hidden rounded-xl border-delicate bg-lux-surface relative">
+                    <img loading="lazy" src="images/gallery-15.jpg" onerror="this.src='https://images.unsplash.com/photo-1507525428034-b723cf961d3e?q=80&w=600&auto=format&fit=crop'" class="w-full h-auto art-img">
                 </div>
 
             </div>
+
+            <!-- IMAGE 21 (Final Thank You Banner) - Placed below the masonry grid! -->
+            <div class="max-w-7xl mx-auto mt-6 md:mt-10 min-h-[200px] md:min-h-[300px] overflow-hidden rounded-xl group relative flex items-center justify-center bg-lux-base border-delicate" data-aos="fade-up">
+                <!-- Using object-center ensures the face/main subject isn't oddly cropped at the top -->
+                <img loading="lazy" src="images/gallery-16.jpg" onerror="this.src='https://images.unsplash.com/photo-1522083111874-9842aeb049f5?q=80&w=1500&auto=format&fit=crop'" class="absolute inset-0 w-full h-full object-cover object-center opacity-30 art-img">
+                <h2 class="text-3xl md:text-5xl lg:text-6xl font-serif text-lux-gold italic z-10 relative px-4 text-center drop-shadow-2xl">Thank you for viewing.</h2>
+            </div>
+
         </div>
     </section>
 
