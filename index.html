@@ -7,7 +7,6 @@
     
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-    <!-- Ultra-luxury fonts: Cormorant Upright for elegance, Manrope for stark modern clarity -->
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Upright:wght@300;400;500;600;700&family=Manrope:wght@200;300;400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
@@ -21,11 +20,11 @@
                     },
                     colors: {
                         lux: {
-                            base: '#070a10',     /* Midnight Sapphire / Deepest Navy */
-                            surface: '#0f141e',  /* Slightly lighter navy for depth */
+                            base: '#05070a',     /* Deepest Midnight Void */
+                            surface: '#0a0d14',  /* Subtle contrast surface */
                             gold: '#d4af37',     /* Brushed Champagne Gold */
-                            pearl: '#f3ece3',    /* Pearl White for readable text */
-                            muted: '#8a94a6',    /* Muted blue-grey */
+                            pearl: '#f3ece3',    /* Pearl White */
+                            muted: '#7a8494',    /* Muted editorial grey */
                         }
                     }
                 }
@@ -34,7 +33,7 @@
     </script>
     <style>
         html, body { 
-            background-color: #070a10; 
+            background-color: #05070a; 
             color: #f3ece3; 
             overflow-x: hidden !important; 
             width: 100%;
@@ -43,31 +42,30 @@
 
         /* CUSTOM CINEMATIC FILM GRAIN */
         .film-grain {
-            position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
-            pointer-events: none; z-index: 50; opacity: 0.04;
-            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+            position: fixed; inset: 0; pointer-events: none; z-index: 50; opacity: 0.05;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+        }
+
+        /* Cinematic Slow Background Zoom */
+        .hero-zoom {
+            animation: slowZoom 30s ease-in-out infinite alternate;
+        }
+        @keyframes slowZoom {
+            0% { transform: scale(1); }
+            100% { transform: scale(1.15); }
         }
 
         /* Massive Background Watermark Numbers */
         .watermark {
-            position: absolute;
-            font-size: 20rem;
-            line-height: 1;
-            font-family: 'Cormorant Upright', serif;
-            color: rgba(212, 175, 55, 0.03); /* Faint gold */
-            z-index: 0;
-            pointer-events: none;
-            user-select: none;
+            position: absolute; font-size: 25rem; line-height: 1; font-family: 'Cormorant Upright', serif;
+            color: rgba(212, 175, 55, 0.02); z-index: 0; pointer-events: none; user-select: none;
         }
-
-        @media (max-width: 768px) {
-            .watermark { font-size: 10rem; }
-        }
+        @media (max-width: 768px) { .watermark { font-size: 12rem; } }
 
         /* Slideshow Fading Setup */
         .slideshow-wrapper { position: relative; width: 100%; height: 100%; }
         .slideshow-wrapper img {
-            position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover;
+            position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover;
             opacity: 0; animation: imageFade 15s infinite; 
         }
         .slideshow-wrapper img:nth-child(1) { animation-delay: 0s; }
@@ -82,12 +80,30 @@
             100% { opacity: 0; transform: scale(1.05); }
         }
 
-        /* Image hover reveal effect */
-        .art-img { transition: filter 0.5s ease, transform 0.8s ease; filter: grayscale(40%); }
-        .group:hover .art-img { filter: grayscale(0%); transform: scale(1.03); }
+        /* Art Image Hover Effect */
+        .art-img { transition: filter 0.6s ease, transform 1s ease; filter: grayscale(35%); }
+        .group:hover .art-img { filter: grayscale(0%); transform: scale(1.04); }
         
-        /* Custom delicate borders */
         .border-delicate { border: 1px solid rgba(212, 175, 55, 0.15); }
+        
+        /* THE GRID FIX: True Masonry Columns */
+        .masonry-grid {
+            column-count: 2;
+            column-gap: 0.5rem;
+        }
+        @media (min-width: 768px) {
+            .masonry-grid { column-count: 3; column-gap: 1rem; }
+        }
+        @media (min-width: 1024px) {
+            .masonry-grid { column-count: 4; column-gap: 1rem; }
+        }
+        .masonry-item {
+            break-inside: avoid; /* Prevents images from splitting across columns */
+            margin-bottom: 0.5rem;
+        }
+        @media (min-width: 768px) {
+            .masonry-item { margin-bottom: 1rem; }
+        }
     </style>
 </head>
 <body class="antialiased selection:bg-lux-gold selection:text-lux-base">
@@ -97,85 +113,92 @@
 
 <div class="w-full overflow-hidden relative">
 
+    <!-- THE GOLDEN THREAD (Timeline Line down the center) -->
+    <div class="hidden md:block absolute left-1/2 transform -translate-x-1/2 w-[1px] h-full bg-gradient-to-b from-transparent via-lux-gold/20 to-transparent z-0"></div>
+
     <!-- SLIDE 1: The Immersive Hero -->
-    <section class="relative w-full h-[100dvh] flex items-end justify-center pb-20 md:pb-32 px-6">
-        <!-- Hero Background Image -->
-        <div class="absolute inset-0 w-full h-full z-0">
-            <img src="images/hero-bg.jpg" onerror="this.src='https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?q=80&w=2000&auto=format&fit=crop'" class="w-full h-full object-cover" alt="Hero">
-            <!-- Vignette gradient for text readability -->
+    <section class="relative w-full h-[100dvh] flex items-end justify-center pb-20 md:pb-24 px-6 overflow-hidden">
+        <!-- Hero Background Image (Image 1) -->
+        <div class="absolute inset-0 w-full h-full z-0 overflow-hidden">
+            <img src="images/hero-bg.jpg" onerror="this.src='https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?q=80&w=2000&auto=format&fit=crop'" class="w-full h-full object-cover hero-zoom" alt="Hero">
+            <!-- Vignette gradient -->
             <div class="absolute inset-0 bg-gradient-to-t from-lux-base via-lux-base/50 to-transparent"></div>
             <div class="absolute inset-0 bg-gradient-to-b from-lux-base/50 to-transparent"></div>
         </div>
         
-        <div class="relative z-10 w-full max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-end gap-10">
+        <div class="relative z-10 w-full max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-end gap-10 border-b border-lux-gold/20 pb-10">
             
             <div data-aos="fade-up" data-aos-duration="2000">
-                <p class="text-lux-gold text-[10px] md:text-xs tracking-[0.3em] uppercase mb-4 md:mb-6 font-semibold">
-                    ॥ OM Shree Ganeshay Namah ॥
-                </p>
-                <h1 class="text-6xl md:text-8xl lg:text-[8rem] font-serif leading-none tracking-wide text-lux-pearl drop-shadow-2xl">
+                <div class="flex items-center gap-4 mb-4 md:mb-6">
+                    <p class="text-lux-gold text-[10px] md:text-xs tracking-[0.3em] uppercase font-semibold">॥ OM Shree Ganeshay Namah ॥</p>
+                    <div class="w-12 h-[1px] bg-lux-gold"></div>
+                </div>
+                <h1 class="text-6xl md:text-[7rem] lg:text-[9rem] font-serif leading-none tracking-wide text-lux-pearl drop-shadow-2xl">
                     VRAJ<br>
-                    <span class="italic text-lux-gold">PANCHAL</span>
+                    <span class="italic text-lux-gold ml-0 md:ml-16">PANCHAL</span>
                 </h1>
             </div>
 
-            <div data-aos="fade-left" data-aos-duration="2000" data-aos-delay="500" class="max-w-xs text-left md:text-right border-l md:border-l-0 md:border-r border-lux-gold/30 pl-4 md:pl-0 md:pr-4">
-                <p class="text-lux-pearl/80 text-sm md:text-base font-light leading-relaxed mb-4">
+            <div data-aos="fade-left" data-aos-duration="2000" data-aos-delay="500" class="max-w-xs text-left md:text-right">
+                <p class="text-lux-pearl/70 text-sm md:text-base font-light leading-relaxed mb-6">
                     A cinematic glimpse into my life, heritage, and ambitions. Based in Malta, rooted in Tarapur.
                 </p>
-                <p class="text-lux-gold text-xs tracking-[0.2em] uppercase">Scroll to Discover</p>
+                <div class="inline-flex items-center gap-3 border border-lux-gold/30 px-6 py-3 rounded-full backdrop-blur-sm">
+                    <p class="text-lux-gold text-[10px] tracking-[0.2em] uppercase">Est. 2003</p>
+                </div>
             </div>
 
         </div>
     </section>
 
-    <!-- SLIDE 2: Chapter 01 - The Persona (NO CARDS) -->
+    <!-- SLIDE 2: Chapter 01 - The Persona -->
     <section class="relative w-full py-24 md:py-40 px-6">
         <div class="watermark top-0 left-0 -translate-x-1/4">01</div>
         
-        <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12 md:gap-24 relative z-10 items-center">
+        <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-16 md:gap-24 relative z-10 items-center">
             
-            <!-- Left Side: Editorial Image -->
-            <div class="lg:col-span-5 relative" data-aos="fade-right">
-                <div class="aspect-[3/4] w-full max-w-md mx-auto lg:mx-0 overflow-hidden rounded-t-full rounded-b-md border-delicate p-2">
-                    <img src="images/main-profile.jpg" onerror="this.src='https://images.unsplash.com/photo-1534308143481-c55f00be8bd7?q=80&w=1000&auto=format&fit=crop'" class="w-full h-full object-cover rounded-t-full rounded-b-sm filter contrast-125" alt="Profile">
+            <!-- Left Side: Editorial Image (Image 2) -->
+            <div class="lg:col-span-5 relative" data-aos="fade-right" data-aos-duration="1500">
+                <div class="aspect-[3/4] w-full max-w-sm mx-auto overflow-hidden rounded-t-full rounded-b-md border-delicate p-2 bg-lux-surface/50 backdrop-blur-sm">
+                    <img src="images/main-profile.jpg" onerror="this.src='https://images.unsplash.com/photo-1534308143481-c55f00be8bd7?q=80&w=1000&auto=format&fit=crop'" class="w-full h-full object-cover rounded-t-full rounded-b-sm art-img" alt="Profile">
                 </div>
-                <!-- Floating Element -->
-                <div class="absolute -right-4 md:-right-10 bottom-20 bg-lux-surface/90 backdrop-blur-md border-delicate px-6 py-4 rounded-xl shadow-2xl">
-                    <p class="text-lux-gold text-[10px] uppercase tracking-widest mb-1">Age & Height</p>
-                    <p class="text-lux-pearl font-serif text-2xl">23 Yr / 5'7"</p>
+                <!-- Abstract Floating Badge -->
+                <div class="absolute -right-2 md:-right-6 bottom-16 md:bottom-24 bg-lux-base/90 backdrop-blur-xl border border-lux-gold/30 px-8 py-5 rounded-2xl shadow-2xl flex flex-col items-center">
+                    <span class="text-lux-gold font-serif text-4xl mb-1">5'7"</span>
+                    <span class="text-lux-pearl/60 text-[9px] uppercase tracking-widest">Height</span>
                 </div>
             </div>
 
             <!-- Right Side: Floating Text -->
-            <div class="lg:col-span-7" data-aos="fade-up">
-                <h2 class="text-4xl md:text-6xl font-serif text-lux-pearl mb-10">
+            <div class="lg:col-span-7" data-aos="fade-left" data-aos-duration="1500">
+                <p class="text-lux-gold text-xs uppercase tracking-[0.3em] mb-4">Chapter 01</p>
+                <h2 class="text-5xl md:text-7xl font-serif text-lux-pearl mb-12">
                     The <span class="italic text-lux-gold">Persona</span>
                 </h2>
                 
                 <div class="grid grid-cols-2 gap-y-12 gap-x-8">
-                    <div class="border-t border-lux-gold/20 pt-4">
-                        <p class="text-lux-muted text-[10px] uppercase tracking-[0.2em] font-bold mb-2">Born</p>
-                        <p class="text-lux-pearl text-xl font-light">07 Dec 2003</p>
-                        <p class="text-lux-gold/70 text-sm mt-1 italic">Tarapur</p>
+                    <div class="border-t border-lux-gold/20 pt-5">
+                        <p class="text-lux-muted text-[10px] uppercase tracking-[0.2em] font-bold mb-3">Born</p>
+                        <p class="text-lux-pearl text-2xl font-serif tracking-wide">07 Dec 2003</p>
+                        <p class="text-lux-gold/70 text-xs mt-2 italic font-light tracking-widest uppercase">Tarapur</p>
                     </div>
                     
-                    <div class="border-t border-lux-gold/20 pt-4">
-                        <p class="text-lux-muted text-[10px] uppercase tracking-[0.2em] font-bold mb-2">Heritage</p>
-                        <p class="text-lux-pearl text-xl font-light">Hindu Panchal</p>
-                        <p class="text-lux-gold/70 text-sm mt-1 italic">Indian Nationality</p>
+                    <div class="border-t border-lux-gold/20 pt-5">
+                        <p class="text-lux-muted text-[10px] uppercase tracking-[0.2em] font-bold mb-3">Heritage</p>
+                        <p class="text-lux-pearl text-2xl font-serif tracking-wide">Hindu Panchal</p>
+                        <p class="text-lux-gold/70 text-xs mt-2 italic font-light tracking-widest uppercase">Indian</p>
                     </div>
 
-                    <div class="border-t border-lux-gold/20 pt-4">
-                        <p class="text-lux-muted text-[10px] uppercase tracking-[0.2em] font-bold mb-2">Dietary</p>
-                        <p class="text-lux-pearl text-xl font-light">Vegetarian</p>
-                        <p class="text-lux-gold/70 text-sm mt-1 italic">Strictly</p>
+                    <div class="border-t border-lux-gold/20 pt-5">
+                        <p class="text-lux-muted text-[10px] uppercase tracking-[0.2em] font-bold mb-3">Dietary</p>
+                        <p class="text-lux-pearl text-2xl font-serif tracking-wide">Vegetarian</p>
+                        <p class="text-lux-gold/70 text-xs mt-2 italic font-light tracking-widest uppercase">Strictly</p>
                     </div>
 
-                    <div class="border-t border-lux-gold/20 pt-4">
-                        <p class="text-lux-muted text-[10px] uppercase tracking-[0.2em] font-bold mb-2">Astrology</p>
-                        <p class="text-lux-pearl text-xl font-light">Vrushabh</p>
-                        <p class="text-lux-gold/70 text-sm mt-1 italic">Taurus</p>
+                    <div class="border-t border-lux-gold/20 pt-5">
+                        <p class="text-lux-muted text-[10px] uppercase tracking-[0.2em] font-bold mb-3">Astrology & Blood</p>
+                        <p class="text-lux-pearl text-2xl font-serif tracking-wide">Vrushabh | B+</p>
+                        <p class="text-lux-gold/70 text-xs mt-2 italic font-light tracking-widest uppercase">Taurus</p>
                     </div>
                 </div>
             </div>
@@ -183,80 +206,74 @@
         </div>
     </section>
 
-    <!-- SLIDE 3: Chapter 02 - Bloodline (NO CARDS) -->
-    <section class="relative w-full py-24 md:py-40 px-6 bg-lux-surface">
+    <!-- SLIDE 3: Chapter 02 - Bloodline -->
+    <section class="relative w-full py-24 md:py-40 px-6 bg-lux-surface/40">
         <div class="watermark top-10 right-0 translate-x-1/4">02</div>
         
-        <div class="max-w-6xl mx-auto relative z-10" data-aos="fade-up">
-            <div class="text-center mb-16 md:mb-24">
-                <h2 class="text-4xl md:text-6xl font-serif text-lux-pearl mb-4">Our <span class="italic text-lux-gold">Heritage</span></h2>
-                <div class="w-12 h-[1px] bg-lux-gold mx-auto"></div>
-            </div>
+        <div class="max-w-6xl mx-auto relative z-10 text-center" data-aos="zoom-in" data-aos-duration="1500">
+            <p class="text-lux-gold text-xs uppercase tracking-[0.3em] mb-4">Chapter 02</p>
+            <h2 class="text-5xl md:text-7xl font-serif text-lux-pearl mb-6">Our <span class="italic text-lux-gold">Heritage</span></h2>
+            <p class="text-lux-muted font-light max-w-md mx-auto mb-16">A close-knit family balancing our traditional roots in Tarapur with a modern outlook on life.</p>
             
-            <!-- Staggered Typography Layout instead of boxes -->
-            <div class="flex flex-col md:flex-row justify-between items-center md:items-start gap-16 md:gap-8">
-                
-                <div class="text-center md:text-left flex-1" data-aos="fade-right">
-                    <p class="text-lux-gold text-[10px] uppercase tracking-[0.2em] font-bold mb-2">Father</p>
-                    <h3 class="text-3xl md:text-4xl font-serif text-lux-pearl">Naimeshbhai Jagdishbhai Panchal</h3>
-                    <p class="text-lux-muted mt-2 font-light tracking-wide">Welder & Transporter</p>
+            <div class="flex flex-col md:flex-row justify-center items-center gap-12 md:gap-24 mb-16">
+                <div>
+                    <p class="text-lux-gold text-[10px] uppercase tracking-[0.2em] font-bold mb-3">Father</p>
+                    <h3 class="text-3xl md:text-4xl font-serif text-lux-pearl mb-2">Naimeshbhai Jagdishbhai Panchal</h3>
+                    <p class="text-lux-muted font-light italic">Welder & Transporter</p>
                 </div>
                 
-                <div class="hidden md:block w-[1px] h-32 bg-lux-gold/20"></div>
+                <div class="hidden md:block w-[1px] h-24 bg-lux-gold/20"></div>
 
-                <div class="text-center md:text-left flex-1" data-aos="fade-left">
-                    <p class="text-lux-gold text-[10px] uppercase tracking-[0.2em] font-bold mb-2">Mother</p>
-                    <h3 class="text-3xl md:text-4xl font-serif text-lux-pearl">Vaishaliben Naimeshbhai Panchal</h3>
-                    <p class="text-lux-muted mt-2 font-light tracking-wide">Tailor</p>
+                <div>
+                    <p class="text-lux-gold text-[10px] uppercase tracking-[0.2em] font-bold mb-3">Mother</p>
+                    <h3 class="text-3xl md:text-4xl font-serif text-lux-pearl mb-2">Vaishaliben Naimeshbhai Panchal</h3>
+                    <p class="text-lux-muted font-light italic">Tailor</p>
                 </div>
-                
             </div>
 
-            <div class="mt-20 flex flex-col md:flex-row justify-between items-center border-t border-lux-gold/20 pt-10" data-aos="fade-up">
-                <div class="text-center md:text-left mb-8 md:mb-0">
-                    <p class="text-lux-gold text-[10px] uppercase tracking-[0.2em] font-bold mb-2">Sibling</p>
-                    <h3 class="text-2xl font-serif text-lux-pearl">Hiral</h3>
+            <div class="flex flex-col md:flex-row justify-center items-center gap-12 md:gap-24 border-t border-lux-gold/20 pt-16">
+                <div>
+                    <p class="text-lux-gold text-[10px] uppercase tracking-[0.2em] font-bold mb-3">Sibling</p>
+                    <h3 class="text-2xl md:text-3xl font-serif text-lux-pearl">Hiral</h3>
                 </div>
-                <div class="text-center md:text-right max-w-sm">
-                    <p class="text-lux-gold text-[10px] uppercase tracking-[0.2em] font-bold mb-2">Native Residence</p>
-                    <p class="text-lux-pearl font-light leading-relaxed">Bhakti nagar society, Vasad Road,<br>Tarapur, Anand, Pincode 388180</p>
+                
+                <div class="hidden md:block w-[1px] h-16 bg-lux-gold/20"></div>
+                
+                <div class="max-w-xs">
+                    <p class="text-lux-gold text-[10px] uppercase tracking-[0.2em] font-bold mb-3"><i class="fa-solid fa-house-chimney mr-2"></i>Native Residence</p>
+                    <p class="text-lux-pearl font-light leading-relaxed">Bhakti nagar society, Vasad Road,<br>Tarapur, Anand, 388180</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- SLIDE 4: Chapter 03 - Trajectory (NO CARDS) -->
+    <!-- SLIDE 4: Chapter 03 - Trajectory -->
     <section class="relative w-full py-24 md:py-40 px-6">
         <div class="watermark bottom-0 left-0 -translate-x-1/4">03</div>
 
-        <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16 md:gap-24 relative z-10 items-center">
+        <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-16 md:gap-24 relative z-10 items-center">
             
-            <div data-aos="fade-up">
-                <h2 class="text-4xl md:text-6xl font-serif text-lux-pearl mb-12">
+            <div class="lg:col-span-6" data-aos="fade-right" data-aos-duration="1500">
+                <p class="text-lux-gold text-xs uppercase tracking-[0.3em] mb-4">Chapter 03</p>
+                <h2 class="text-5xl md:text-7xl font-serif text-lux-pearl mb-16">
                     The <span class="italic text-lux-gold">Trajectory</span>
                 </h2>
                 
                 <div class="space-y-12">
-                    <div>
-                        <div class="flex items-center gap-4 mb-2">
-                            <div class="w-8 h-[1px] bg-lux-gold"></div>
-                            <p class="text-lux-gold text-[10px] uppercase tracking-[0.2em] font-bold">Present Focus</p>
-                        </div>
-                        <h4 class="text-3xl font-serif text-lux-pearl mb-2">Business & Management</h4>
-                        <p class="text-lux-muted font-light leading-relaxed max-w-md">Broadening global perspectives and acquiring higher education independently in Malta, Europe.</p>
+                    <div class="border-l-2 border-lux-gold pl-6 ml-2">
+                        <p class="text-lux-gold text-[10px] uppercase tracking-[0.2em] font-bold mb-3">Present Focus</p>
+                        <h4 class="text-3xl font-serif text-lux-pearl mb-3">Business & Management</h4>
+                        <p class="text-lux-muted font-light leading-relaxed max-w-sm">Broadening global perspectives and acquiring higher education independently in Malta, Europe.</p>
                     </div>
                     
-                    <div>
-                        <div class="flex items-center gap-4 mb-2">
-                            <div class="w-8 h-[1px] bg-lux-muted/40"></div>
-                            <p class="text-lux-muted text-[10px] uppercase tracking-[0.2em] font-bold">Foundation (2022)</p>
-                        </div>
-                        <h4 class="text-2xl font-serif text-lux-pearl/80 mb-2">Diploma in Computer Engineering</h4>
-                        <p class="text-lux-muted/80 font-light leading-relaxed max-w-md">Gujarat Technological University</p>
+                    <div class="border-l-2 border-lux-muted/30 pl-6 ml-2">
+                        <p class="text-lux-muted text-[10px] uppercase tracking-[0.2em] font-bold mb-3">Foundation (2022)</p>
+                        <h4 class="text-2xl font-serif text-lux-pearl/80 mb-3">Diploma in Computer Engineering</h4>
+                        <p class="text-lux-muted/80 font-light leading-relaxed max-w-sm">Gujarat Technological University</p>
                     </div>
                 </div>
 
-                <div class="mt-16 pt-10 border-t border-lux-gold/10">
+                <div class="mt-16 pt-12 border-t border-lux-gold/10">
                     <p class="text-lux-gold text-[10px] uppercase tracking-[0.2em] font-bold mb-6">Passions & Interests</p>
                     <p class="text-lux-pearl font-serif text-2xl md:text-3xl italic leading-relaxed">
                         "Finding balance through <span class="text-lux-gold">Traveling</span>, capturing moments in <span class="text-lux-gold">Photography</span>, and exploring logic via <span class="text-lux-gold">Coding</span> & <span class="text-lux-gold">Trading</span>."
@@ -264,10 +281,9 @@
                 </div>
             </div>
 
-            <!-- Cinematic Slideshow Background block -->
-            <div class="relative w-full aspect-[4/5] md:aspect-square overflow-hidden border-delicate p-2" data-aos="fade-left">
-                <div class="slideshow-wrapper">
-                    <!-- IMAGES 3,4,5 -->
+            <!-- Cinematic Slideshow (Images 3,4,5) -->
+            <div class="lg:col-span-6 relative w-full aspect-[4/5] overflow-hidden border-delicate p-2 rounded-2xl bg-lux-surface" data-aos="fade-left" data-aos-duration="1500">
+                <div class="slideshow-wrapper rounded-xl overflow-hidden">
                     <img loading="lazy" src="images/slideshow-1.jpg" onerror="this.src='https://images.unsplash.com/photo-1549488344-1f9b8d2bd1f3?q=80&w=1200&auto=format&fit=crop'" alt="Slide 1">
                     <img loading="lazy" src="images/slideshow-2.jpg" onerror="this.src='https://images.unsplash.com/photo-1522083111874-9842aeb049f5?q=80&w=1200&auto=format&fit=crop'" alt="Slide 2">
                     <img loading="lazy" src="images/slideshow-3.jpg" onerror="this.src='https://images.unsplash.com/photo-1511818966892-d7d671e672a2?q=80&w=1200&auto=format&fit=crop'" alt="Slide 3">
@@ -277,90 +293,79 @@
         </div>
     </section>
 
-    <!-- SLIDE 5: Chapter 04 - The Art Wall (Seamless Gallery) -->
-    <section class="relative w-full py-24 md:py-32 bg-lux-surface">
+    <!-- SLIDE 5: Chapter 04 - The Art Wall (THE PERFECT GRID FIX) -->
+    <section class="relative w-full py-24 md:py-32 bg-lux-surface/50">
         <div class="watermark top-10 right-0 translate-x-1/4">04</div>
         
-        <div class="w-full px-2 md:px-6 mx-auto relative z-10">
+        <div class="w-full px-4 md:px-6 mx-auto relative z-10">
             <div class="text-center mb-16 md:mb-24" data-aos="fade-up">
-                <h2 class="text-4xl md:text-6xl font-serif text-lux-pearl mb-4">A Visual <span class="italic text-lux-gold">Narrative</span></h2>
-                <div class="w-12 h-[1px] bg-lux-gold mx-auto"></div>
+                <p class="text-lux-gold text-xs uppercase tracking-[0.3em] mb-4">Chapter 04</p>
+                <h2 class="text-5xl md:text-7xl font-serif text-lux-pearl mb-6">A Visual <span class="italic text-lux-gold">Narrative</span></h2>
+                <div class="w-16 h-[1px] bg-lux-gold mx-auto"></div>
             </div>
 
-            <!-- BORDERLESS ASYMMETRICAL GRID (No cards, just pure imagery) -->
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-2 md:gap-3 auto-rows-[150px] md:auto-rows-[250px] grid-flow-row-dense" data-aos="fade-up">
+            <!-- THE GRID FIX: TRUE MASONRY. This guarantees 0 empty gaps! -->
+            <div class="masonry-grid max-w-7xl mx-auto" data-aos="fade-up">
                 
-                <!-- IMAGE 6 -->
-                <div class="col-span-2 row-span-2 overflow-hidden group">
-                    <img loading="lazy" src="images/gallery-1.jpg" onerror="this.src='https://images.unsplash.com/photo-1551043047-1d2adf00f3fd?q=80&w=1000&auto=format&fit=crop'" class="w-full h-full object-cover art-img">
+                <!-- IMAGES 6 to 20 -->
+                <div class="masonry-item group relative rounded-xl md:rounded-2xl overflow-hidden border-delicate">
+                    <img loading="lazy" src="images/gallery-1.jpg" onerror="this.src='https://images.unsplash.com/photo-1551043047-1d2adf00f3fd?q=80&w=800&auto=format&fit=crop'" class="w-full h-auto art-img">
                 </div>
-                <!-- IMAGE 7 -->
-                <div class="col-span-1 row-span-1 overflow-hidden group">
-                    <img loading="lazy" src="images/gallery-2.jpg" onerror="this.src='https://images.unsplash.com/photo-1498654896293-37aacf113fd9?q=80&w=600&auto=format&fit=crop'" class="w-full h-full object-cover art-img">
+                <div class="masonry-item group relative rounded-xl md:rounded-2xl overflow-hidden border-delicate">
+                    <img loading="lazy" src="images/gallery-2.jpg" onerror="this.src='https://images.unsplash.com/photo-1498654896293-37aacf113fd9?q=80&w=800&auto=format&fit=crop'" class="w-full h-auto art-img">
                 </div>
-                <!-- IMAGE 8 -->
-                <div class="col-span-1 row-span-2 overflow-hidden group">
-                    <img loading="lazy" src="images/gallery-3.jpg" onerror="this.src='https://images.unsplash.com/photo-1558981403-c5f9899a28bc?q=80&w=600&auto=format&fit=crop'" class="w-full h-full object-cover art-img">
+                <div class="masonry-item group relative rounded-xl md:rounded-2xl overflow-hidden border-delicate">
+                    <img loading="lazy" src="images/gallery-3.jpg" onerror="this.src='https://images.unsplash.com/photo-1558981403-c5f9899a28bc?q=80&w=800&auto=format&fit=crop'" class="w-full h-auto art-img">
                 </div>
-                <!-- IMAGE 9 -->
-                <div class="col-span-1 row-span-1 overflow-hidden group">
-                    <img loading="lazy" src="images/gallery-4.jpg" onerror="this.src='https://images.unsplash.com/photo-1507525428034-b723cf961d3e?q=80&w=600&auto=format&fit=crop'" class="w-full h-full object-cover art-img">
+                <div class="masonry-item group relative rounded-xl md:rounded-2xl overflow-hidden border-delicate">
+                    <img loading="lazy" src="images/gallery-4.jpg" onerror="this.src='https://images.unsplash.com/photo-1507525428034-b723cf961d3e?q=80&w=800&auto=format&fit=crop'" class="w-full h-auto art-img">
                 </div>
-                <!-- IMAGE 10 -->
-                <div class="col-span-2 row-span-1 overflow-hidden group">
-                    <img loading="lazy" src="images/gallery-5.jpg" onerror="this.src='https://images.unsplash.com/photo-1549488344-1f9b8d2bd1f3?q=80&w=1000&auto=format&fit=crop'" class="w-full h-full object-cover art-img">
+                <div class="masonry-item group relative rounded-xl md:rounded-2xl overflow-hidden border-delicate">
+                    <img loading="lazy" src="images/gallery-5.jpg" onerror="this.src='https://images.unsplash.com/photo-1549488344-1f9b8d2bd1f3?q=80&w=800&auto=format&fit=crop'" class="w-full h-auto art-img">
                 </div>
-                <!-- IMAGE 11 -->
-                <div class="col-span-1 row-span-2 overflow-hidden group">
-                    <img loading="lazy" src="images/gallery-6.jpg" onerror="this.src='https://images.unsplash.com/photo-1522083111874-9842aeb049f5?q=80&w=600&auto=format&fit=crop'" class="w-full h-full object-cover art-img">
+                <div class="masonry-item group relative rounded-xl md:rounded-2xl overflow-hidden border-delicate">
+                    <img loading="lazy" src="images/gallery-6.jpg" onerror="this.src='https://images.unsplash.com/photo-1522083111874-9842aeb049f5?q=80&w=800&auto=format&fit=crop'" class="w-full h-auto art-img">
                 </div>
-                <!-- IMAGE 12 -->
-                <div class="col-span-1 row-span-1 overflow-hidden group">
-                    <img loading="lazy" src="images/gallery-7.jpg" onerror="this.src='https://images.unsplash.com/photo-1498654896293-37aacf113fd9?q=80&w=600&auto=format&fit=crop'" class="w-full h-full object-cover art-img">
+                <div class="masonry-item group relative rounded-xl md:rounded-2xl overflow-hidden border-delicate">
+                    <img loading="lazy" src="images/gallery-7.jpg" onerror="this.src='https://images.unsplash.com/photo-1498654896293-37aacf113fd9?q=80&w=800&auto=format&fit=crop'" class="w-full h-auto art-img">
                 </div>
-                <!-- IMAGE 13 -->
-                <div class="col-span-1 row-span-1 overflow-hidden group">
-                    <img loading="lazy" src="images/gallery-8.jpg" onerror="this.src='https://images.unsplash.com/photo-1511818966892-d7d671e672a2?q=80&w=600&auto=format&fit=crop'" class="w-full h-full object-cover art-img">
+                <div class="masonry-item group relative rounded-xl md:rounded-2xl overflow-hidden border-delicate">
+                    <img loading="lazy" src="images/gallery-8.jpg" onerror="this.src='https://images.unsplash.com/photo-1511818966892-d7d671e672a2?q=80&w=800&auto=format&fit=crop'" class="w-full h-auto art-img">
                 </div>
-                <!-- IMAGE 14 -->
-                <div class="col-span-1 row-span-1 overflow-hidden group">
-                    <img loading="lazy" src="images/gallery-9.jpg" onerror="this.src='https://images.unsplash.com/photo-1507525428034-b723cf961d3e?q=80&w=600&auto=format&fit=crop'" class="w-full h-full object-cover art-img">
+                <div class="masonry-item group relative rounded-xl md:rounded-2xl overflow-hidden border-delicate">
+                    <img loading="lazy" src="images/gallery-9.jpg" onerror="this.src='https://images.unsplash.com/photo-1507525428034-b723cf961d3e?q=80&w=800&auto=format&fit=crop'" class="w-full h-auto art-img">
                 </div>
-                <!-- IMAGE 15 -->
-                <div class="col-span-2 row-span-2 overflow-hidden group">
-                    <img loading="lazy" src="images/gallery-10.jpg" onerror="this.src='https://images.unsplash.com/photo-1551043047-1d2adf00f3fd?q=80&w=1200&auto=format&fit=crop'" class="w-full h-full object-cover art-img">
+                <div class="masonry-item group relative rounded-xl md:rounded-2xl overflow-hidden border-delicate">
+                    <img loading="lazy" src="images/gallery-10.jpg" onerror="this.src='https://images.unsplash.com/photo-1551043047-1d2adf00f3fd?q=80&w=800&auto=format&fit=crop'" class="w-full h-auto art-img">
                 </div>
-                <!-- IMAGE 16 -->
-                <div class="col-span-1 row-span-1 overflow-hidden group">
-                    <img loading="lazy" src="images/gallery-11.jpg" onerror="this.src='https://images.unsplash.com/photo-1498654896293-37aacf113fd9?q=80&w=600&auto=format&fit=crop'" class="w-full h-full object-cover art-img">
+                <div class="masonry-item group relative rounded-xl md:rounded-2xl overflow-hidden border-delicate">
+                    <img loading="lazy" src="images/gallery-11.jpg" onerror="this.src='https://images.unsplash.com/photo-1498654896293-37aacf113fd9?q=80&w=800&auto=format&fit=crop'" class="w-full h-auto art-img">
                 </div>
-                <!-- IMAGE 17 -->
-                <div class="col-span-1 row-span-1 overflow-hidden group">
-                    <img loading="lazy" src="images/gallery-12.jpg" onerror="this.src='https://images.unsplash.com/photo-1498654896293-37aacf113fd9?q=80&w=600&auto=format&fit=crop'" class="w-full h-full object-cover art-img">
+                <div class="masonry-item group relative rounded-xl md:rounded-2xl overflow-hidden border-delicate">
+                    <img loading="lazy" src="images/gallery-12.jpg" onerror="this.src='https://images.unsplash.com/photo-1498654896293-37aacf113fd9?q=80&w=800&auto=format&fit=crop'" class="w-full h-auto art-img">
                 </div>
-                <!-- IMAGE 18 -->
-                <div class="col-span-1 row-span-2 overflow-hidden group">
-                    <img loading="lazy" src="images/gallery-13.jpg" onerror="this.src='https://images.unsplash.com/photo-1558981403-c5f9899a28bc?q=80&w=600&auto=format&fit=crop'" class="w-full h-full object-cover art-img">
+                <div class="masonry-item group relative rounded-xl md:rounded-2xl overflow-hidden border-delicate">
+                    <img loading="lazy" src="images/gallery-13.jpg" onerror="this.src='https://images.unsplash.com/photo-1558981403-c5f9899a28bc?q=80&w=800&auto=format&fit=crop'" class="w-full h-auto art-img">
                 </div>
-                <!-- IMAGE 19 -->
-                <div class="col-span-1 row-span-1 overflow-hidden group">
-                    <img loading="lazy" src="images/gallery-14.jpg" onerror="this.src='https://images.unsplash.com/photo-1507525428034-b723cf961d3e?q=80&w=600&auto=format&fit=crop'" class="w-full h-full object-cover art-img">
+                <div class="masonry-item group relative rounded-xl md:rounded-2xl overflow-hidden border-delicate">
+                    <img loading="lazy" src="images/gallery-14.jpg" onerror="this.src='https://images.unsplash.com/photo-1507525428034-b723cf961d3e?q=80&w=800&auto=format&fit=crop'" class="w-full h-auto art-img">
                 </div>
-                <!-- IMAGE 20 -->
-                <div class="col-span-2 row-span-1 overflow-hidden group">
-                    <img loading="lazy" src="images/gallery-15.jpg" onerror="this.src='https://images.unsplash.com/photo-1549488344-1f9b8d2bd1f3?q=80&w=1000&auto=format&fit=crop'" class="w-full h-full object-cover art-img">
-                </div>
-                <!-- IMAGE 21 -->
-                <div class="col-span-2 md:col-span-4 row-span-1 overflow-hidden group relative flex items-center justify-center border-y border-lux-gold/20 py-20 mt-10">
-                    <img loading="lazy" src="images/gallery-16.jpg" onerror="this.src='https://images.unsplash.com/photo-1522083111874-9842aeb049f5?q=80&w=1500&auto=format&fit=crop'" class="absolute inset-0 w-full h-full object-cover opacity-20 art-img">
-                    <h2 class="text-4xl md:text-6xl font-serif text-lux-gold italic z-10 relative px-4 text-center">Thank you for viewing.</h2>
+                <div class="masonry-item group relative rounded-xl md:rounded-2xl overflow-hidden border-delicate">
+                    <img loading="lazy" src="images/gallery-15.jpg" onerror="this.src='https://images.unsplash.com/photo-1549488344-1f9b8d2bd1f3?q=80&w=800&auto=format&fit=crop'" class="w-full h-auto art-img">
                 </div>
             </div>
+
+            <!-- IMAGE 21 (Final Full-Width Banner) -->
+            <div class="max-w-7xl mx-auto mt-4 md:mt-8 aspect-[2/1] md:aspect-[4/1] rounded-xl md:rounded-2xl overflow-hidden group relative flex items-center justify-center border-delicate" data-aos="fade-up">
+                <img loading="lazy" src="images/gallery-16.jpg" onerror="this.src='https://images.unsplash.com/photo-1522083111874-9842aeb049f5?q=80&w=1500&auto=format&fit=crop'" class="absolute inset-0 w-full h-full object-cover opacity-30 art-img">
+                <h2 class="text-3xl md:text-5xl lg:text-7xl font-serif text-lux-gold italic z-10 relative px-4 text-center drop-shadow-xl tracking-wide">Thank you for viewing.</h2>
+            </div>
+            
         </div>
     </section>
 
     <!-- SLIDE 6: The Epilogue (Contact) -->
-    <section class="relative w-full py-24 md:py-40 px-6 text-center border-t border-lux-gold/10">
+    <section class="relative w-full py-24 md:py-40 px-6 text-center border-t border-lux-gold/10 bg-lux-base">
         <div class="max-w-4xl mx-auto" data-aos="zoom-in">
             <h2 class="text-4xl md:text-6xl font-serif text-lux-pearl mb-6">Begin a <span class="italic text-lux-gold">Conversation</span></h2>
             <p class="text-lux-muted mb-16 font-light">Available for correspondence in India and Europe.</p>
@@ -371,14 +376,14 @@
                     <p class="text-2xl font-serif text-lux-pearl transition group-hover:text-lux-gold">+91 63533 36958</p>
                 </div>
                 
-                <div class="hidden md:block w-[1px] h-12 bg-lux-gold/20"></div>
+                <div class="hidden md:block w-[1px] h-16 bg-lux-gold/20"></div>
                 
                 <div class="group cursor-pointer">
                     <p class="text-lux-gold text-[10px] uppercase tracking-[0.2em] font-bold mb-3 transition group-hover:text-lux-pearl">Malta / Direct</p>
                     <p class="text-2xl font-serif text-lux-pearl transition group-hover:text-lux-gold">+356 9979 4792</p>
                 </div>
                 
-                <div class="hidden md:block w-[1px] h-12 bg-lux-gold/20"></div>
+                <div class="hidden md:block w-[1px] h-16 bg-lux-gold/20"></div>
 
                 <div class="group cursor-pointer">
                     <p class="text-lux-gold text-[10px] uppercase tracking-[0.2em] font-bold mb-3 transition group-hover:text-lux-pearl">Email</p>
@@ -389,7 +394,7 @@
     </section>
 
     <!-- Minimalist Footer -->
-    <footer class="text-center py-10 relative z-20">
+    <footer class="text-center py-10 relative z-20 bg-lux-base border-t border-lux-gold/10">
         <p class="text-[10px] text-lux-muted/50 tracking-[0.3em] uppercase font-bold">Created By Mr. Vraj N. Panchal</p>
     </footer>
 
